@@ -1,0 +1,26 @@
+{
+  "name": "my-first-project",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www -e hbs,js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.2.1",
+    "express-handlebars": "^6.0.2",
+    "express-session": "^1.17.2",
+    "fileupload": "^1.0.0",
+    "hbs": "~4.0.4",
+    "http-errors": "~1.6.3",
+    "i": "^0.3.7",
+    "mongodb": "^4.3.0",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.15",
+    "objectid": "^3.2.1",
+    "twilio": "^3.72.0"
+  }
+}

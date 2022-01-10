@@ -1,0 +1,178 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.body-card {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    position: relative;
+    width: 320px;
+    height: 200px;
+    background: #122936;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    width: 100%;
+    height: 100%;
+    background: #2196f3;
+    transform: skewY(345deg);
+    transition: 0.5s;
+}
+
+.card:hover::before {
+    top: -60%;
+    transform: skewY(390deg);
+}
+
+.card::after {
+    content: "zar";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-weight: 600;
+    font-size: 8em;
+    color: rgba(0, 0, 0, 0.1);
+}
+
+.card .imgBx {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1;
+}
+
+.card .imgBx img {
+    max-width: 90%;
+    transition: 0.5s;
+}
+
+.card:hover .imgBx img {
+    max-width: 70%;
+}
+
+.card .contextBx {
+    position: relative;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.card .contextBx h3 {
+    font-size: 18px;
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card .contextBx .price {
+    font-size: 24px;
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.card .contextBx .buy {
+    position: relative;
+    top: 200px;
+    opacity: 0;
+    padding: 10px 30px;
+    margin-top: 15px;
+    color: #fff;
+    text-decoration: none;
+    background: #2196f3;
+    border-radius: 30px;
+    text-decoration: uppercase;
+    letter-spacing: 1px;
+    transition: 0.5s;
+}
+
+.card .contextBx .buy {
+    top: 0;
+    opacity: 1;
+}
+</style>
+
+{{!-- Banner --}}
+<div id="demo" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+    <li data-target="#demo" data-slide-to="0" class="active"></li>
+    <li data-target="#demo" data-slide-to="1"></li>
+    <li data-target="#demo" data-slide-to="2"></li>
+  </ul>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Los Angeles" width="1100" height="500">
+      <div class="carousel-caption">
+        <h3>Los Angeles</h3>
+        <p>We had such a great time in LA!</p>
+      </div>   
+    </div>
+    <div class="carousel-item">
+      <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="Chicago" width="1100" height="500">
+      <div class="carousel-caption">
+        <h3>Chicago</h3>
+        <p>Thank you, Chicago!</p>
+      </div>   
+    </div>
+    <div class="carousel-item">
+      <img src="https://www.w3schools.com/bootstrap4/chicago.jpg" alt="New York" width="1100" height="500">
+      <div class="carousel-caption">
+        <h3>New York</h3>
+        <p>We love the Big Apple!</p>
+      </div>   
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+{{!-- banner end --}}
+
+  {{!-- CARD --}}
+  <div class="container">
+      <div class="row justify-content-around ml-5">
+        {{#each product}}
+          <div class="col-12 col-md-6 col-lg-4">
+    <div class="card body-card mt-5">
+        <div class="imgBx">
+            <img src="/product-image/{{this._id}}.png" alt="">
+        </div>
+        <div class="contextBx">
+            <h3>{{this.category}}</h3>
+            <p>{{this.description}}</p>
+            <h2 class="price">${{this.price}}<small>.22</small></h2>
+            <a href="#" class="buy">Add cart</a>
+            <a href="#" class="buy">Buy now</a>
+        </div>
+        </div>
+    </div>
+    {{/each}}
+   
+    </div>
+    </div>
+{{!-- card end --}}

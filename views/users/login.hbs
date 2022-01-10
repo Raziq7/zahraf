@@ -1,0 +1,61 @@
+<div class="container login-container">
+  <div class="row" style=" margin-left: 25% !important;">
+    <div class="col-md-6 login-form-1">
+      <h3>Login for shopping with zar</h3>
+
+      <form action="/login" method="POST" id="formdsub">
+       
+          <p>{{err}}</p>
+          <p>{{otploginEr}}</p>
+          <p>{{loginStatus}}</p>
+
+        <div class="form-group" id="loginHide">
+          <input
+            name="email"
+            type="email"
+            class="form-control"
+            placeholder="Your Email *"
+            value=""
+          />
+        </div>
+        <div class="form-group" id="login-password-Hide">
+          <input
+            name="password"
+            type="password"
+            class="form-control"
+            placeholder="Your Password *"
+            value=""
+          />
+        </div>
+        <div class="form-group" id="hideLogin">
+          <input
+            type="submit"
+            class="btnSubmit"
+            value="LOGIN"
+            style="margin-right: 8px;"
+          />
+
+        </div>
+
+      </form>
+      <div class="form-group" id="hideForget">
+        <a href="#" class="ForgetPwd">Forget Password?</a>
+        <div><span >OR</span></div>
+        <div>
+          <a
+            style=" display: flex;
+    justify-item: end;
+"
+            class="btnotp"
+            href="/user-otp"
+          >OTP</a></div>
+      </div>
+      <div>
+        <a href="/signup" style="font-size: small; margin-top: 50px;">Dont have
+          an Account?</a>
+
+      </div>
+
+    </div>
+  </div>
+</div>

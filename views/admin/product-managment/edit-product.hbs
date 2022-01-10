@@ -1,0 +1,35 @@
+<div class="container">
+   
+    <form action="/admin/update-product/?id={{editResponse._id}}" method="post" enctype="multipart/form-data">
+    
+    <label for="">Name</label><br>
+    <input value="{{editResponse.name}}" class="form-control" name="name" type="text"><br>
+    <label for="">category</label><br>
+    <input value="{{editResponse.category}}" class="form-control" name="category" type="text"><br>
+    <label for="">price</label><br>
+    <input value="{{editResponse.price}}" class="form-control" name="price" type="text"><br>
+    <label for="">description</label><br>
+    <input value="{{editResponse.description}}" class="form-control" name="description" type="text"> <br>
+    <label for="">File</label><br>
+    <img width="150" height="150" src="/product-image/{{editResponse._id}}.png" alt="">
+    <input class="form-control" name="image"  type="file"><br>
+    <button class="btn btn-success" type="submit">Submit</button> 
+    
+</form>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

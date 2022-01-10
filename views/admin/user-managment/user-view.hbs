@@ -1,0 +1,45 @@
+
+  {{!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"> --}}
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">User Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">phone</th>
+
+      <th scope="col">Option</th>
+
+      {{!-- <th scope="col">Handle</th> --}}
+    </tr>
+  </thead>
+
+  <tbody>
+       {{#each showUser}}
+    <tr>
+     
+       
+      <th scope="row">{{@index}}</th>
+      <td>{{this.name}}</td>
+      <td>{{this.email}}</td>
+      <td>{{this.phone}}</td>
+      {{!-- <td>{{this.address}}</td> --}}
+     <td><a class="btn btn-primary" href="/admin/user-edit/?id={{this._id}}">edit</a>
+    {{#if this.isblock}}
+    <a class="btn btn-warning" href="/admin/block-user/{{this._id}}">block</a>
+    {{else}}
+    <a class="btn btn-warning" href="/admin/unBlock-user/{{this._id}}">unblock</a>
+    {{/if}}
+
+   
+
+     {{!-- <a class="btn btn-danger" href="/admin/user-delete/{{this._id}}" onclick="return ('Are you sure delete{{this.username}}')">Delete</a> --}}
+     
+</td>
+{{/each }}
+    </tr>
+      
+
+    
+  </tbody>
+</table>
