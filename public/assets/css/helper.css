@@ -1,0 +1,314 @@
+/*----------------------------------------*/
+/*  1.  Default CSS
+/*----------------------------------------*/
+a {transition: all 0.3s ease 0s;text-decoration:none;}
+a, a:hover {
+  color: #e23e1d;
+  text-decoration: none;
+}
+a:active, a:hover, a:focus{
+  outline: 0 none;
+  text-decoration: none;
+}
+img {max-width:100%;}
+strong {font-weight:500;}
+/*----------------------------------------*/
+/*  Heading CSS
+/*----------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+   font-family: 'Rubik', sans-serif;
+}
+h1{
+  font-size:60px;
+  line-height:60px;
+}
+h2{
+  font-size:48px;
+  line-height:60px;
+}
+h3{
+  font-size:24px;
+  line-height:36px;
+}
+h4{
+  font-size:18px;
+  line-height:30px;
+}
+h5{
+	font-size:14px;
+	line-height:25px;
+}
+h6{
+  font-size:12px;
+  line-height:24px;
+}
+/*----------------------------------------*/
+/*  List None CSS
+/*----------------------------------------*/
+ul.list-none {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+ul.inline-list li {
+	display:inline-block;
+}
+/*----------------------------------------*/
+/*  Overlay CSS
+/*----------------------------------------*/
+.overlay {
+	position:relative;
+}
+.overlay:before {
+  background-color: rgba(0, 0, 0, 0.5);
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index:1;
+}
+/*----------------------------------------*/
+/*  Input CSS
+/*----------------------------------------*/
+input:focus{
+  outline:none;
+}
+textarea:focus{
+  outline:none;
+}
+select:focus{
+  outline:none;
+}
+button:focus{
+  outline:none;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  opacity:1;
+}
+input::-moz-placeholder, textarea::-moz-placeholder {
+  opacity:1;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  opacity:1;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+  opacity:1;
+}
+/*----------------------------------------*/
+/*  Button CSS
+/*----------------------------------------*/
+.btn-common {
+	font-family: 'Rubik', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #e23e1d;
+    padding: 0 20px;
+    min-width: 140px;
+    height: 40px;
+    line-height: 38px;
+    text-align: center;
+	cursor:pointer;
+	display:inline-block;
+	text-transform:uppercase;
+	border:2px solid #e23e1d;
+	border-radius:30px;
+}
+.btn-common:hover {
+    background-color: #e23e1d;
+	border-color:#e23e1d;
+    color: #ffffff;
+}
+.btn-common.btn-cover {
+	background-color:#e23e1d;
+	border-color:#e23e1d;
+	color:#ffffff;
+}
+.btn-common.btn-cover:hover {
+	background-color:#b53217;
+	border-color:#b53217;
+}
+.btn-common.width-115 {
+	min-width:115px;
+}
+.btn-common.width-165 {
+	min-width:165px;
+}
+.btn-common.width-180 {
+	min-width:180px;
+}
+.btn-common.width-190 {
+	min-width:180px;
+}
+.btn-transparent {
+	background-color:transparent;
+	border:2px solid #89898b;
+	color:#ffffff;
+}
+.btn-transparent:hover {
+	background-color:#8bc052;
+	border-color:#8bc052;
+}
+.btn-common i {
+	margin-left:5px;
+}
+/*----------------------------------------*/
+/*  Margin CSS
+/*----------------------------------------*/
+.mt-05 {margin-top:05px;}
+.mt-10 {margin-top:10px;}
+.mt-15 {margin-top:15px;}
+.mt-20 {margin-top:20px;}
+.mt-25 {margin-top:25px !important;}
+.mt-30 {margin-top:30px !important;}
+.mt-35 {margin-top:35px;}
+.mt-50 {margin-top:50px;}
+.mt-55 {margin-top:55px;}
+.mt-40 {margin-top:40px;}
+.mt-43 {margin-top:43px;}
+.mt-45 {margin-top:45px;}
+.mt-47 {margin-top:47px;}
+.mt-60 {margin-top:60px;}
+.mt-65 {margin-top:65px;}
+.mt-70 {margin-top:70px;}
+.mt-72 {margin-top:72px;}
+.mt-75 {margin-top:75px;}
+.mt-85 {margin-top:85px;}
+.mt-80 {margin-top:80px;}
+.mt-90 {margin-top:90px;}
+.mt-95 {margin-top:95px;}
+.mt-100 {margin-top:100px;}
+.mt-110 {margin-top:110px;}
+.mt-130 {margin-top:130px;}
+.mt-170 {margin-top:170px;}
+
+.mb-60 {margin-bottom:60px;}
+.mb-45 {margin-bottom:45px;}
+.mb-30 {margin-bottom:30px;}
+.mb-25 {margin-bottom:25px;}
+.mb-20 {margin-bottom:20px;}
+.mb-15 {margin-bottom:15px;}
+
+.mr-40 {margin-right:40px !important;}
+.mr-30 {margin-right:30px !important;}
+.mr-25 {margin-right:25px !important;}
+.mlr-30 {margin:0 30px !important}
+
+.ml-20 {margin-left:20px;}
+.ml-35 {margin-left:35px;}
+
+.mt-minus-100 {margin-top:-100px;}
+.mt-minus-30 {margin-top:-30px;}
+.mt-minus-40 {margin-top:-40px;}
+.mt-minus-50 {margin-top:-50px;}
+.mt-minus-55 {margin-top:-55px;}
+.mt-minus-60 {margin-top:-60px;}
+.mt-minus-70 {margin-top:-70px;}
+.mt-minus-90 {margin-top:-90px;}
+.mt-minus-10 {margin-top:-10px;}
+.mb-minus-20 {margin-bottom:-20px;}
+.mlr-minus-12 {margin:0 -12px;}
+/*----------------------------------------*/
+/*  Padding CSS
+/*----------------------------------------*/
+.pd-lr15 {padding:0 15px;}
+.pd-lr0 {padding:0 0;}
+.pd-40 {padding:40px;}
+.pd-30 {padding:30px !important;}
+.pt-30 {padding-top:30px;}
+.pt-10 {padding-top:10px;}
+.pt-15 {padding-top:15px;}
+.pt-20 {padding-top:20px;}
+.pt-45 {padding-top:45px;}
+.pt-60 {padding-top:60px;}
+.pt-80 {padding-top:80px !important;}
+.pt-90 {padding-top:90px;}
+.pt-95 {padding-top:95px;}
+.pt-100 {padding-top:100px;}
+.pb-10 {padding-bottom:10px;}
+.pb-70 {padding-bottom:70px;}
+.pb-80 {padding-bottom:80px;}
+.pb-40 {padding-bottom:40px;}
+.pb-25 {padding-bottom:25px;}
+.pb-22 {padding-bottom:22px;}
+.pb-30 {padding-bottom:30px !important;}
+.pb-40 {padding-bottom:40px !important;}
+.pb-45 {padding-bottom:45px !important;}
+.pb-50 {padding-bottom:50px;}
+.pb-60 {padding-bottom:60px;}
+.pb-80 {padding-bottom: 80px !important;}
+.pb-90 {padding-bottom: 90px !important;}
+.pb-100 {padding-bottom: 100px !important;}
+.pb-110 {padding-bottom: 110px !important;}
+.pb-111 {padding-bottom: 111px !important;}
+.pd-5 {padding:5px;}
+.pd-20 {padding:20px;}
+.pd-25 {padding:25px;}
+.pd-30 {padding:30px;}
+.pd-100 {padding:100px;}
+.ptb-75 {padding:75px 0;}
+.pt-75 {padding-top:75px;}
+
+.pl-05 {padding-left:05px;}
+.pl-10 {padding-left:10px;}
+.pr-10 {padding-right:10px;}
+/*----------------------------------------*/
+/*  Height CSS
+/*----------------------------------------*/
+.height-30 {height:30px !important;}
+.height-800 {height:800px;}
+.height-630 {height:0px;}
+.height-550 {height:550px;}
+.height-400 {height:400px;}
+.height-450 {height:450px;}
+.height-200 {height:200px;}
+.height-100 {height:100px;}
+.width-100p {width:100%;}
+.height-100vh {height:100vh;}
+/*----------------------------------------*/
+/*  7.  Etc CSS
+/*----------------------------------------*/
+.img-shadow {box-shadow: 0px 20px 25px 0px rgba( 0, 0, 0, 0.10 );}
+.img-shadow img {width:100%;}
+.img-100p img {width:100%;}
+.shadow-none {box-shadow:unset!important;}
+.bg-lightblue {background-color:#f0f2f9;}
+.bg-white {background-color:#ffffff;}
+.bg-111 {background-color:#111111 !important;}
+.unrelative {position:static;}
+.text-black h1, .text-black h2 {color:#111111 !important;}
+.text-white h1, .text-white h2, .text-white h3 {color:#ffffff !important;}
+.z-index {position:relative;z-index:9;}
+.z-index-8 {position:relative;z-index:8;}
+.fix {overflow:hidden !important;}
+.overflow-v {overflow: visible !important;}
+.table-cell {display:table-cell;}
+.display-table {
+  display: table;
+  height: 100vh;
+  width: 100%;
+}
+.d-table {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+.vertical-middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+.d-hidden {display:none;}
+.bg-none {background-color:transparent !important;}
+
+.br-none {border:none !important;}
+.bt-none {border-top:0 !important;}
+.bl-none {border-left:0 !important;}
+.br-none {border-right:0 !important;}
+.bb-none {border-bottom:0 !important;}
+
+.bb-2c2c {border-bottom:1px solid #2c2c2c;}
+
+.br-bottom {border-bottom:1px solid #ebebeb;}
+.bg-black {background-color:#181818;}
+.fix-x {overflow-x:hidden;overflow-y:hidden;}

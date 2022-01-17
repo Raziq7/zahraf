@@ -1,4 +1,9 @@
 module.exports={
     PRODUCT_COLLECTION:"product",
-    USER_COLLECTION:"users"
+    USER_COLLECTION:"users",
+    CATEGORY_COLLECTION:"category",
+    BANNER_COLLECTIONS:"banner",
+    CART_COLLECTION:"cart",
+    ADDRESS_COLLECTION:"address",
+    ORDER_COLLECTION:"order"
 }

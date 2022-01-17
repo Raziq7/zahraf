@@ -1,178 +1,2516 @@
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&display=swap');
-* {
-    padding: 0;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-}
 
-.body-card {
-    min-height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.card {
-    position: relative;
-    width: 320px;
-    height: 200px;
-    background: #122936;
-    border-radius: 20px;
-    overflow: hidden;
-}
+	
+	
+	<!--slider-area start-->
+	<div class="slider-area">
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<div class="col-lg-12">
+					<div class="main-slider">
+						<div class="slider-single bg-5">
+							<div class="d-table">
+								<div class="slider-caption text-center">
+									<h4>seson sale!</h4>
+									<h2 class="cssanimation leDoorCloseLeft sequence">mobiles 30% Off</h2>
+									<a href="#" class="btn-common mt-43">shop now</a>
+								</div>
+							</div>
+						</div>
+						<div class="slider-single bg-7">
+							<div class="d-table">
+								<div class="slider-caption text-center">
+									<h4>seson sale!</h4>
+									<h2 class="cssanimation leDoorCloseLeft sequence">head Phones 30% Off</h2>
+									<a href="#" class="btn-common mt-43">shop now</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--slider-area end-->
+	
+	<!--banner-area start-->
+	<div class="banner-area mt-30">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-4 col-sm-6 hover-effect">
+					<div class="banner-square">
+						<a href="#"><img src="https://img.tatacliq.com/images/i7/437Wx649H/MP000000010632207_437Wx649H_202109171909501.jpeg" alt="" /></a>
+						<div class="banner-caption">
+							<h2>Mobile Phone'S</h2>
+							<h3>Collection 2022</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-sm-6 d-none d-lg-block">
+					<div class="banner-square hover-effect">
+						<img src="https://cdn.mos.cms.futurecdn.net/7xuuL9GAGDDjhietMy3RGJ.jpg" alt="" />
+						<div class="banner-caption style-2 pt-20">
+							<h2><strong>Head Phone</strong> Collection</h2>
+						</div>
+					</div>
+					<div class="banner-square hover-effect mt-30">
+						<img src="https://cdn.mos.cms.futurecdn.net/iCmmEKQHQgTfJr8KBaSthe.jpg" alt="" />
+						<div class="banner-caption style-2">
+							<h2><strong>Speaker</strong> Collection</h2>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-sm-6 mt-sm-20">
+					<div class="banner-square hover-effect">
+						<img src="https://static.digit.in/default/thumb_87896_default_td_480x480.jpeg" alt="" />
+						<div class="banner-caption">
+							<h2>Laptops</h2>
+							<h3>Collection 2022</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--banner-area end-->
+	
+	<!--products-area start-->
+	<div class="products-area mt-55">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title text-center">
+						<h2>New Arrivals</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<!--products-tab-->
+					<div class="products-tab">
+						<div class="product-nav-tabs style-2 text-center">
+							<ul class="nav nav-tabs">
+								<li><a class="active" data-toggle="tab" href="#all-products">all products</a></li>
+								<li><a data-toggle="tab" href="#men">men’s</a></li>
+								<li><a data-toggle="tab" href="#women">women’s</a></li>
+								<li><a data-toggle="tab" href="#kid">kid’s</a></li>
+								<li><a data-toggle="tab" href="#accessories">accessories</a></li>
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div id="all-products" class="tab-pane fade in show active">
+								<div class="row four-items cv-visible">
+									{{#each product}}
+									
+									<div class="col-lg-3">
+										<!--single-product-->
+										        
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">{{this.name}}</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/product-image/{{this._id}}image.png" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="/productDetails/?id={{this._id}}" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>${{this.price}}</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a onclick="addToCart('{{this._id}}')" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+										  
+									</div>
+									{{/each}}
+									{{!-- <div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div> --}}
+									{{!-- <div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div> --}}
+									{{!-- <div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div> --}}
+									{{!-- <div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div> --}}
+									{{!-- <div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div> --}}
+									{{!-- <div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div> --}}
+								</div>
+							</div>
+							{{!-- <div id="men" class="tab-pane fade">
+								<div class="row four-items cv-visible">
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> --}}
+							{{!-- <div id="women" class="tab-pane fade">
+								<div class="row four-items cv-visible">
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> --}}
+							{{!-- <div id="kid" class="tab-pane fade">
+								<div class="row four-items cv-visible">
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> --}}
+							{{!-- <div id="accessories" class="tab-pane fade">
+								<div class="row four-items cv-visible">
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div> --}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--products-area end-->
+	
+	<!--store-supports-area start-->
+	<div class="store-supports-area bg-lightblue pd-20 mt-30 mt-sm-50">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-sm-6">
+					<div class="store-support style-3">
+						<div class="support-icon">
+							<img src="/assets/images/icons/bank-loan.png" alt="" />
+						</div>
+						<div class="support-text">
+							<strong>Free Delivery</strong>
+							<p>For all order over 99$</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="store-support style-3">
+						<div class="support-icon">
+							<img src="/assets/images/icons/bank-liquidity.png" alt="" />
+						</div>
+						<div class="support-text">
+							<strong>30 Days Return</strong>
+							<p>If goods have Problems</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="store-support style-3">
+						<div class="support-icon">
+							<img src="/assets/images/icons/bank-credit-card.png" alt="" />
+						</div>
+						<div class="support-text">
+							<strong>Secure Payment</strong>
+							<p>100% secure payment</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-3 col-sm-6">
+					<div class="store-support style-3">
+						<div class="support-icon">
+							<img src="/assets/images/icons/bank-support.png" alt="" />
+						</div>
+						<div class="support-text">
+							<strong>24/7 Support</strong>
+							<p>Dedicated support</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--store-supports-area end-->
+	
+	<!--products-area start-->
+	{{!-- <div class="products-area mt-55">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-title text-center">
+						<h2>Features Products</h2>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<!--products-tab-->
+					<div class="products-tab">
+						<div class="product-nav-tabs style-2 text-center">
+							<ul class="nav nav-tabs">
+								<li><a class="active" data-toggle="tab" href="#all-products2">all products</a></li>
+								<li><a data-toggle="tab" href="#men2">men’s</a></li>
+								<li><a data-toggle="tab" href="#women2">women’s</a></li>
+								<li><a data-toggle="tab" href="#kid2">kid’s</a></li>
+								<li><a data-toggle="tab" href="#accessories2">accessories</a></li>
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div id="all-products2" class="tab-pane fade in show active">
+								<div class="row four-items cv-visible">
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="/addtocart/?id={{productResponse._id}}" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="men2" class="tab-pane fade">
+								<div class="row four-items cv-visible">
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="women2" class="tab-pane fade">
+								<div class="row four-items cv-visible">
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="kid2" class="tab-pane fade">
+								<div class="row four-items cv-visible">
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div id="accessories2" class="tab-pane fade">
+								<div class="row four-items cv-visible">
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Manaco</a></small>
+												<h4><a href="#">The timeless classic worn by Steve</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/26.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$95.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Iphone</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/27.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<div class="pull-left">
+													<span>$95.00</span>
+												</div>
+												<div class="pull-right">
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+													<i class="fa fa-star-o"></i>
+												</div>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">TAG Heuer </a></small>
+												<h4><a href="#">iPATROL Riley V2 Bonus Bundle - WiFi</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/10.jpg" alt="" /></a>
+												<div class="downsale">SALE</div>
+												<div class="product-quick-view">
+													<a href="/admin/" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$195.00</span>
+												<del>229.99</del>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-3">
+										<!--single-product-->
+										<div class="product-single">
+											<div class="product-title">
+												<small><a href="#">Aquaracer</a></small>
+												<h4><a href="#">Samsung CF591 Series Curved</a></h4>
+											</div>
+											<div class="product-thumb">
+												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
+												<div class="product-quick-view">
+													<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												</div>
+											</div>
+											<div class="product-price-rating">
+												<span>$525.00</span>
+											</div>
+											<div class="product-action">
+												<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
+												<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
+												<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> --}}
+	<!--products-area end-->
+	
+	<!--product-offer-area start-->
+	<div class="product-offer-area mt-30 mt-sm-50">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6 col-md-6">
+					<div class="product-offer-left">
+						<img src="/assets/images/offers/1.jpg" alt="" />
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6">
+					<div class="text-block text-center">
+						<h3>Shop Events & Save Up To 65% OFF!</h3>
+						<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut <br/> aliquip ex ea commodo consequat.</p>
+						<div class="product-countdown style-2 mt-30">
+							<div data-countdown="2019/05/01"></div>
+						</div>
+						<a href="#" class="btn-common mt-50">Shop now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--product-offer-area end-->
+	
+	<!--brands-area start-->
+	<div class="container-fluid">
+		<div class="brands-area br-none">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="brand-items">
+						<div class="brand-item">
+							<a href="#">
+								<img class="brand-static" src="/assets/images/brands/1.jpg" alt="" />
+							</a>
+						</div>
+						<div class="brand-item">
+							<a href="#">
+								<img class="brand-static" src="/assets/images/brands/2.jpg" alt="" />
+							</a>
+						</div>
+						<div class="brand-item">
+							<a href="#">
+								<img class="brand-static" src="/assets/images/brands/3.jpg" alt="" />
+							</a>
+						</div>
+						<div class="brand-item">
+							<a href="#">
+								<img class="brand-static" src="/assets/images/brands/4.jpg" alt="" />
+							</a>
+						</div>
+						<div class="brand-item">
+							<a href="#">
+								<img class="brand-static" src="/assets/images/brands/5.jpg" alt="" />
+							</a>
+						</div>
+						<div class="brand-item">
+							<a href="#">
+								<img class="brand-static" src="/assets/images/brands/6.jpg" alt="" />
+							</a>
+						</div>
+						<div class="brand-item">
+							<a href="#">
+								<img class="brand-static" src="/assets/images/brands/7.jpg" alt="" />
+							</a>
+						</div>
+						<div class="brand-item">
+							<a href="#">
+								<img class="brand-static" src="/assets/images/brands/8.jpg" alt="" />
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--brands-area end-->
+	
+	
 
-.card::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    width: 100%;
-    height: 100%;
-    background: #2196f3;
-    transform: skewY(345deg);
-    transition: 0.5s;
-}
-
-.card:hover::before {
-    top: -60%;
-    transform: skewY(390deg);
-}
-
-.card::after {
-    content: "zar";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    font-weight: 600;
-    font-size: 8em;
-    color: rgba(0, 0, 0, 0.1);
-}
-
-.card .imgBx {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    z-index: 1;
-}
-
-.card .imgBx img {
-    max-width: 90%;
-    transition: 0.5s;
-}
-
-.card:hover .imgBx img {
-    max-width: 70%;
-}
-
-.card .contextBx {
-    position: relative;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    z-index: 1;
-}
-
-.card .contextBx h3 {
-    font-size: 18px;
-    color: #ffffff;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.card .contextBx .price {
-    font-size: 24px;
-    color: #fff;
-    font-weight: 500;
-    letter-spacing: 1px;
-}
-
-.card .contextBx .buy {
-    position: relative;
-    top: 200px;
-    opacity: 0;
-    padding: 10px 30px;
-    margin-top: 15px;
-    color: #fff;
-    text-decoration: none;
-    background: #2196f3;
-    border-radius: 30px;
-    text-decoration: uppercase;
-    letter-spacing: 1px;
-    transition: 0.5s;
-}
-
-.card .contextBx .buy {
-    top: 0;
-    opacity: 1;
-}
-</style>
-
-{{!-- Banner --}}
-<div id="demo" class="carousel slide" data-ride="carousel">
-  <ul class="carousel-indicators">
-    <li data-target="#demo" data-slide-to="0" class="active"></li>
-    <li data-target="#demo" data-slide-to="1"></li>
-    <li data-target="#demo" data-slide-to="2"></li>
-  </ul>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="https://www.w3schools.com/bootstrap4/la.jpg" alt="Los Angeles" width="1100" height="500">
-      <div class="carousel-caption">
-        <h3>Los Angeles</h3>
-        <p>We had such a great time in LA!</p>
-      </div>   
-    </div>
-    <div class="carousel-item">
-      <img src="https://www.w3schools.com/bootstrap4/ny.jpg" alt="Chicago" width="1100" height="500">
-      <div class="carousel-caption">
-        <h3>Chicago</h3>
-        <p>Thank you, Chicago!</p>
-      </div>   
-    </div>
-    <div class="carousel-item">
-      <img src="https://www.w3schools.com/bootstrap4/chicago.jpg" alt="New York" width="1100" height="500">
-      <div class="carousel-caption">
-        <h3>New York</h3>
-        <p>We love the Big Apple!</p>
-      </div>   
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-</div>
-{{!-- banner end --}}
-
-  {{!-- CARD --}}
-  <div class="container">
-      <div class="row justify-content-around ml-5">
-        {{#each product}}
-          <div class="col-12 col-md-6 col-lg-4">
-    <div class="card body-card mt-5">
-        <div class="imgBx">
-            <img src="/product-image/{{this._id}}.png" alt="">
-        </div>
-        <div class="contextBx">
-            <h3>{{this.category}}</h3>
-            <p>{{this.description}}</p>
-            <h2 class="price">${{this.price}}<small>.22</small></h2>
-            <a href="#" class="buy">Add cart</a>
-            <a href="#" class="buy">Buy now</a>
-        </div>
-        </div>
-    </div>
-    {{/each}}
-   
-    </div>
-    </div>
-{{!-- card end --}}
+	<!-- modernizr js -->
+	<script src="/assets/js/vendor/modernizr-3.6.0.min.js"></script>
+	<!-- jquery-3.3.1 version -->
+	<script src="/assets/js/vendor/jquery-3.2.1.min.js"></script>
+	<!-- bootstra.min js -->
+	<script src="/assets/js/bootstrap.min.js"></script>
+	<!-- mmenu js -->
+	<script src="/assets/js/jquery.mmenu.js"></script>
+	<!-- easing js -->
+	<script src="/assets/js/jquery.easing.min.js"></script>
+	<!---slick-js-->
+	<script src="/assets/js/slick.min.js"></script>
+	<!---letteranimation-js-->
+	<script src="/assets/js/letteranimation.min.js"></script>
+	<!-- jquery-ui js -->
+	<script src="/assets/js/jquery-ui.min.js"></script>
+	<!-- jquery.countdown js -->
+	<script src="/assets/js/jquery.countdown.min.js"></script>
+	<!-- venobox js -->
+	<script src="/assets/js/venobox.min.js"></script>
+	<!-- plugins js -->
+	<script src="/assets/js/plugins.js"></script>
+	<!-- main js -->
+	<script src="/assets/js/main.js"></script>
+	
+	<!-- Modal -->
+	{{!-- <div class="modal fade" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-4">
+							<div class="tab-content">
+								<div id="product-1" class="tab-pane fade in show active">
+									<div class="product-details-thumb">
+										<img src="/assets/images/products/product-details/1.jpg" alt="" />
+									</div>
+								</div>
+								<div id="product-2" class="tab-pane fade">
+									<div class="product-details-thumb">
+										<img src="/assets/images/products/product-details/2.jpg" alt="" />
+									</div>
+								</div>
+								<div id="product-3" class="tab-pane fade">
+									<div class="product-details-thumb">
+										<img src="/assets/images/products/product-details/3.jpg" alt="" />
+									</div>
+								</div>
+							</div>
+							<ul class="nav nav-tabs products-nav-tabs horizontal quick-view mt-10">
+								<li><a class="active" data-toggle="tab" href="#product-1"><img src="/assets/images/products/product-details/thumb-1.jpg" alt="" /></a></li>
+								<li><a data-toggle="tab" href="#product-2"><img src="/assets/images/products/product-details/thumb-2.jpg" alt="" /></a></li>
+								<li><a data-toggle="tab" href="#product-3"><img src="/assets/images/products/product-details/thumb-3.jpg" alt="" /></a></li>
+							</ul>
+						</div>
+						<div class="col-lg-8">
+							<div class="row">
+								<div class="col-lg-8">
+									<div class="product-details-desc">
+										<h2>{{productResponse.name}}</h2>
+										<ul>
+											<li>{{productResponse.name}}</li>
+											<li>13.3-Inch (diagonal) LED-backlit Glossy Widescreen Display, 1440 x 900 resolution Intel HD Graphics 6000</li>
+											<li>OS X El Capitan, Up to 12 Hours of Battery Life Macbook Air does not have a Retina display on any model.</li>
+										</ul>
+										<div class="product-meta">
+											<ul class="list-none">
+												<li>SKU: 00012 <span>|</span></li>
+												<li>Categories:
+													<a href="#">Tech</a>
+													<a href="#">Macbook</a>
+													<a href="#">Laptop</a>
+													<span>|</span>
+												</li>
+												<li>Tags:
+													<a href="#">Tech,</a>
+													<a href="#">Apple</a>
+												</li>
+											</ul>
+										</div>
+										<div class="social-icons style-5">
+											<span>Share Link:</span>
+											<a href="#"><i class="fa fa-facebook"></i></a>
+											<a href="#"><i class="fa fa-twitter"></i></a>
+											<a href="#"><i class="fa fa-google-plus"></i></a>
+											<a href="#"><i class="fa fa-rss"></i></a>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="product-action stuck text-left">
+										<div class="free-delivery">
+											<a href="#"><i class="ti-truck"></i> Free Delivery</a>
+										</div>
+										<div class="product-price-rating">
+											<div>
+												<del>629.99</del>
+											</div>
+											<span>{{productResponse.price}}</span>
+											<div class="pull-right">
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star-o"></i>
+											</div>
+										</div>
+										<div class="product-colors mt-20">
+											<label>Select Color:</label>
+											<ul class="list-none">
+												<li>Red</li>
+												<li>Black</li>
+												<li>Blue</li>
+											</ul>
+											
+										</div>
+										<div class="product-quantity mt-15">
+											<label>Quatity:</label>
+											<input type="number" value="1" />
+										</div>
+										<div class="add-to-get mt-50">
+											<a href="#" class="add-to-cart">Add to Cart</a>
+											<a href="#" class="add-to-cart compare">+ ADD to Compare</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> --}}
+ 

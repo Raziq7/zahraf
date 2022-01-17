@@ -2,10 +2,13 @@
   <div class="row" style=" margin-left: 25% !important;">
     <div class="col-md-6 login-form-1">	 
 	 <h3>Otp for shopping with zar</h3>
-	 <form action="/signup" method="POST">
+	 <form action="/signup" method="POST" name="myform" onsubmit="return validate()">
                   <p>{{sighnupotpErr}}</p>
+                  <p>{{sighnUpcodeErr}}</p>
+
                         <div class="form-group" id="otpText" >
-                            <input name="otp" type="text" class="form-control" placeholder="Enter Yout OTP" value="" />
+                            <input name="otp" type="text" class="form-control" placeholder="Enter Your OTP" value="" />
+                            <div id="err"></div>
 							<div class="form-group" id="hideLogin">
           <input
             type="submit"
@@ -20,3 +23,15 @@
 			  </div>
 			  </div>
 			  </div>
+<script>
+  function validate(){
+    let otp=document.myform.otp.value;
+    if(otp==null || otp==''){
+      document.getElementById('err').innerHTML='please enter your otp'
+    }else if(isNaN(otp)){
+      document.getElementById('err').innerHTML='String not valid'
+    }
+
+  }
+</script>
+        

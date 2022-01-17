@@ -4,10 +4,11 @@ const productHelpers = require("../Helpers/product-helpers");
 var router = express.Router();
 var ProductHelpers = require("../Helpers/product-helpers");
 var userHelpers = require("../Helpers/user-helpers");
-var serviseSID = "VAf911e28a16ad3b06e7ca26e20a016a82";
+var serviseSID = "VA36fa120a3c7a3e7398782d574b5abf16";
 var accountSID = "AC004073380f5c23a606371bbbc0e1fc3e";
-var authTocken = "fb7d5608ea7d7b2874d914fc5bb103f9";
+var authTocken = "ccb4cb4ab95e2ffb0938038dc2958b74";
 var client = require("twilio")(accountSID, authTocken);
+// session
 let isSession = (req, res, next) => {
   if (req.session.logedIn) {
     next();
@@ -16,11 +17,22 @@ let isSession = (req, res, next) => {
   }
 };
 /* GET home page. */
-router.get("/", function (req, res, next) {
-  productHelpers.viewProducts().then((product) => {
+router.get("/", async function(req, res, next) {
+
+  let cartCount=null;
+  let total=null;
+  if(req.session.user){
+    
+     total=await userHelpers.checkoutTotal(req.session.user._id)
+
+    cartCount= await ProductHelpers.getCartCount(req.session.user._id)
+    console.log(cartCount);
+}
+
+
+  ProductHelpers.viewProducts().then((product) => {
     let userlog = req.session.user;
-    console.log(userlog);
-    res.render("users/index", { user: true, product,userlog });
+    res.render("users/index", { user: true, product,userlog,productResponse:req.session.productResponse,cartCount,total});
   });
 });
 router.get("/login", (req, res) => {
@@ -30,39 +42,44 @@ router.get("/login", (req, res) => {
     let err = req.session.logedInBlock;
     let otploginEr=req.session.otpLoginErr;
     let loginStatus= req.session.logedInstatusErr
-    res.render("users/login", { err,otploginEr,loginStatus});
+    res.render("users/login", {userlog:true ,err,otploginEr,loginStatus});
     req.session.logedInBlock = null;
     req.session.otpLoginErr=null;
     req.session.logedInstatusErr=null;
   }
 });
 router.get("/signup", (req, res) => {
+  let userlog=null;
   if (req.session.logedIn) {
-    let userlog = req.session.response;
+    userlog = req.session.response;
     res.redirect("/");
   } else {
     let confirmerr = req.session.confirmErr;
     let existotp = req.session.exist;
     let otpErr = req.session.otpErr;
 
-    res.render("users/signup", { otpErr, existotp, confirmerr });
+    res.render("users/signup", {userlog:true, otpErr, existotp, confirmerr });
     req.session.confirmErr = null;
   }
 });
 
 router.get("/login-otp", (req, res) => {
   let sighnupotpErr = req.session.sighnUpcodeErr;
-  res.render("users/loginSignup-otp", { sighnupotpErr });
+  res.render("users/loginSignup-otp", {userlog:true, sighnupotpErr });
 });
 
+
+router.get('/submitotp',(req,res)=>{
+  res.render('users/loginSignup-otp',{userlog:true,sighnUpcodeErr:req.session.sighnUpcodeErr})
+})
 // send otp signup
 router.post("/submitotp", async (req, res) => {
-  console.log(req.body);
 
   if (req.body.password == req.body.confirm) {
     let response = await userHelpers.doSignup(req.body);
 
     if (!response) {
+
       req.session.name = req.body.name;
       req.session.phone = req.body.phone;
       req.session.password = req.body.password;
@@ -78,6 +95,7 @@ router.post("/submitotp", async (req, res) => {
           channel: "sms",
         })
        .then((response) => {
+         console.log(req.body);
           if (response.status === "pending") {
             res.redirect("/login-otp");
           } else {
@@ -107,7 +125,6 @@ router.post("/signup", (req, res) => {
       })
       .then((result) => {
         if (result.status === "approved") {
-          console.log("njan approved ayi");
           let userData = {
             name: req.session.name,
             phone: req.session.phone,
@@ -118,17 +135,17 @@ router.post("/signup", (req, res) => {
           console.log(userData);
           userHelpers.doSuccess(userData).then((response) => {
             console.log("njan responsasa...............",response);
-            req.session.user = response;
+            req.session.user = userData;
             res.redirect("/");
           });
         } else {
           req.session.sighnUpcodeErr = "incorrect otp";
-          res.redirect("user/login");
+          res.redirect("/submitotp");
         }
       });
   } catch (err) {
     req.session.sighnUpcodeErr = "incorrect otp";
-    res.redirect("user/login");
+    res.redirect("/submitotp");
   }
 });
 
@@ -148,7 +165,7 @@ router.post("/login",async(req, res) => {
             res.redirect("/login");
           }
         }else{
-          req.session.logedInBlock ="admin block this user" ;
+          req.session.logedInBlock ="admin blocked this user" ;
             res.redirect("/login");
         }
         
@@ -167,11 +184,12 @@ router.get("/logout", (req, res) => {
 router.get('/user-otp',(req,res)=>{
   let otpnumErr=req.session.otpNumberErr
   let otpErr=req.session.otpErr
-  res.render('users/user-otp-number',{otpnumErr,otpErr})
+  res.render('users/user-otp-number',{userlog:true,otpnumErr,otpErr})
 });
 
 router.get('/user-otp-login',(req,res)=>{
-  res.render('users/user-otp-login')
+
+  res.render('users/user-otp-login',{userlog:true,sighnUpcodeErruser:req.session.sighnUpcodeErruser})
 });
 
 
@@ -216,7 +234,6 @@ console.log(req.session.user);
         code: otp,
       }).then((result) => {
         if (result.status === "approved") {
-          console.log("njan approved ayi");
           res.redirect('/')
     }else{
       
@@ -224,16 +241,111 @@ console.log(req.session.user);
     }
   })
 }catch (err) {
-  req.session.sighnUpcodeErr = "incorrect otp";
-  res.redirect("user/login-otp");
+  req.session.sighnUpcodeErruser = "incorrect otp";
+  res.redirect("/login-otp");
 }
 });
+// otp-end
+
 
 
 //product details
 
-router.get('/productDetails',(req,res)=>{
-  res.render('users/product-details/product-details')
+router.get('/productDetails/',(req,res)=>{
+  console.log("njan ivde ethi");
+  ProductHelpers.productDetails(req.query.id).then((productResponse)=>{
+    res.render('users/product-details/product-details',{user:true,productResponse})
+    let image =req.files.image
+    image.mv('./public/product-image/'+req.query.id+".png")
+  })
+});
+
+// user-profile Edit
+// router.get("/user-edit/",(req, res) => {
+//   userHelpers.editUser(req.query.id).then((responseId)=>{
+//     console.log(responseId);
+//     res.render("admin/user-managment/user-edit", {responseId, admin: true});
+//   })
+//   });
+//   router.post('/edit-user/',(req,res)=>{
+//     userHelpers.updateUser(req.query.id,req.body)
+//   })
+ 
+// shopping
+ router.get('/shopping',(req,res)=>{
+   console.log("hello");
+   res.render('users/shopping/shopping',{user:true})
+ });
+
+//  add-to-cart
+router.get('/showCart',isSession,async(req,res)=>{
+ let response=await userHelpers.CollectionCart(req.session.user._id)
+    let totalValue=await userHelpers.checkoutTotal(req.session.user._id)
+    console.log(response);
+    res.render('users/shopping/addToCart',{user:true,response,user:req.session.user._id,totalValue})
+  
+})
+
+router.get('/addtocart/:id',(req,res)=>{
+  console.log("hi");
+  let userId=req.session.user;
+  console.log(userId);
+  userHelpers.addToCart(req.params.id,userId._id).then(()=>{
+    console.log("hello cart");
+   res.json({status:true})
+  })
+});
+router.post('/change-product-quantity',(req,res)=>{
+  console.log("req.body",req.body);
+  userHelpers.changeProductQuantity(req.body).then(async(response)=>{
+    response.total=await userHelpers.checkoutTotal(req.body.user)
+    res.json(response)
+  })
+});
+router.post('/remove-cart',(req,res)=>{
+  userHelpers.removeCart(req.body).then((response)=>{
+    res.json(response)
+  })
+});
+
+// chekcout
+router.get('/checkout',isSession,async(req,res)=>{
+  console.log("hello checkkout");
+ let total=await userHelpers.checkoutTotal(req.session.user._id)
+ let adress=await userHelpers.findAddress()
+ res.render('users/shopping/checkout',{user:true,total,user:req.session.user,adress})
+
+});
+router.post('/place-order',async(req,res)=>{
+  let product =await userHelpers.getCartProduct(req.body.userId)
+ let totalPrice=await userHelpers.checkoutTotal(req.body.userId)
+ userHelpers.placeOrder(req.body,product,totalPrice).then((result)=>{
+   res.json({status:true})
+ })
+  console.log(req.body);
+});
+
+router.get('/address',(req,res)=>{
+  res.render('users/shopping/user-address',{user:true})
+});
+router.post('/add-addres',(req,res)=>{
+  console.log(req.body);
+  userHelpers.addAddress(req.body).then((result)=>{
+    console.log(result);
+    res.redirect('/address')
+  })
+});
+
+router.get('/order-sucess',(req,res)=>{
+  res.render('users/shopping/order-success',{user:true})
+});
+
+router.get('/product-details',isSession,async(req,res)=>{
+  console.log("njan  /product-details");
+  let orders=await userHelpers.showOrderDetails(req.session.user._id)
+  console.log(orders);
+res.render('users/shopping/view-order-products',{user:true,orders})
+  
 })
 
 

@@ -1,0 +1,175 @@
+<!--header-area end-->
+	
+	<div class="shopping-cart-steps">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="cart-steps">
+						<ul class="clearfix">
+							<li class="active">
+								<div class="inner">
+									<span class="step">01</span> <span class="inner-step">Shopping Cart</span>
+								</div>
+							</li>
+							
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!--shopping-cart area-->
+	<div class="shopping-cart-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="table-responsive">
+
+						<table class="cart-table">
+							<thead>
+								<tr>
+									<th>Image</th>
+									<th>Product Name</th>
+									<th>Price</th>
+									<th>Quantity</th>
+									<th>Total</th>
+									<th class="text-center"><i class="fa fa-times" aria-hidden="true"></i></th>
+								</tr>
+							</thead>
+							<tbody>
+								{{#each response}}
+								<tr>
+									<td>
+										
+										<div class="cart-product-thumb">
+											<a href="#"><img width="100" height="100" src="/product-image/{{this.product._id}}image.png" alt="" /></a>
+										</div>
+										
+									</td>
+									<td>
+										<div class="cart-product-name">
+											<h5><a href="#">{{this.product.name}}</a></h5>
+										</div>
+									</td>
+									<td>
+										<span class="cart-product-price">{{this.product.price}}</span>
+									</td>
+									
+									<td>
+										<div class="cart-quantity-changer">
+											<a class="value-decrease qtybutton" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">-</a>
+											{{!-- <input type="disable" id="{{this.product._id}}" value="{{this.quantity}}" /> --}}
+											<span id="{{this.product._id}}">{{this.quantity}}</span>
+											<a class="value-increase qtybutton" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</a>
+										</div>
+									</td>
+							
+									<td>
+										<span class="cart-product-price">{{this.product.price}}</span>
+									</td>
+								
+									<td>
+										<div class="product-remove">
+											<a onclick="removeCart('{{this._id}}','{{this.product._id}}')">
+												<i class="fa fa-times" aria-hidden="true"></i>
+											</a>
+										</div>
+									</td>
+								</tr>
+								{{/each}}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row mt-30">
+				<div class="col-lg-6">
+					<div class="cart-update">
+						<a href="#" class="btn-common">CONTINUE SHOPPING</a>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="cart-box cart-total mb-3">
+						<h5>Cart Total</h5>
+						<div class="cart-box-inner">
+							<table class="table">
+								{{!-- <tr>
+									<td>SUB TOTAL:</td>
+									<td><span>$460.00</span></td>
+								</tr> --}}
+								<tr>
+									<td>GRAND TOTAL:RS.<span id="total">{{totalValue.total}}</span></td>
+									
+								</tr>
+							</table>
+							<div class="proceed-checkout">
+								{{!-- <div class="col-lg-12">
+									<a href="#">Checkout with multiple address</a>
+								</div> --}}
+								<div class="col-lg-12">
+									<a href="/checkout" class="btn-common">PROCEED TO CHECK OUT</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<!--shopping-cart end-->
+	<script src="/javascripts/quntity.js"></script>
+    <script>
+		function changeQuantity(cartId,proId,userId,count){
+    console.log("how are you***********",proId)
+    let quantity=parseInt(document.getElementById(proId).innerHTML) 
+    console.log(quantity)
+
+    console.log(count)
+
+    count=parseInt(count)
+    $.ajax({
+        url:'/change-product-quantity',
+        data:{
+			user:userId,
+            cart:cartId,
+            product:proId,
+            count:count,
+            quantity:quantity
+        },
+        method:'post',
+        success:(response)=>{
+            console.log("I AM A response")
+            if(response.removeProduct){
+             alert('do you want delete'),																																																																																																																																																																																																													confirm('product remove from the cart')
+                location.reload()
+            }else{
+                document.getElementById(proId).innerHTML=quantity+count
+				document.getElementById('total').innerHTML=response.total.total
+
+            }
+        
+        }
+    })
+}
+function removeCart(cartId,proId){
+	let con=confirm('do you want delete')
+	if(con){
+$.ajax({
+		url:'/remove-cart',
+		data:{
+			cart:cartId,
+			product:proId
+		},
+		method:'post',
+	})
+	location.reload()
+	}else{
+
+	}
+	
+
+}
+	</script>

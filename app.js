@@ -13,7 +13,7 @@ var fileUpload = require('express-fileupload');
 let Session =require('express-session')
 
 
-app.use(Session({secret:"key",cookie:{maxAge:60000}}))
+app.use(Session({secret:"key",cookie:{maxAge:600000}}))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
