@@ -1,9 +1,16 @@
+
+<ul class="nav justify-content-center bg-primary">
+  
+  <li class="nav-item">
+    <h1 class="nav-link text-light">Zahraf</h1>
+  
+</ul>
 <div class="container login-container">
-  <div class="row" style=" margin-left: 25% !important;">
+  <div class="row d-flex justify-content-center" >
     <div class="col-md-6 login-form-1">
       <h3>Login for shopping with zar</h3>
 
-      <form action="/login" method="POST" name="mysignup" onsubmit="return validate()">
+      <form action="/login" method="POST" name="mysignup" onsubmit="return validateLogin()">
        
           <p class="text-danger">{{err}}</p>
           <p class="text-danger">{{otploginEr}}</p>
@@ -14,10 +21,11 @@
             name="email"
             type="email"
             class="form-control"
+            
             placeholder="Your Email *"
             value=""
           />
-          <div id="err"></div>
+          <div id="emailerr"></div>
         </div>
         <div class="form-group" id="login-password-Hide">
           <input
@@ -28,6 +36,8 @@
             value=""
           />
         </div>
+          <div id="passworderr"></div>
+
         <div class="form-group" id="hideLogin">
           <input
             type="submit"
@@ -39,18 +49,17 @@
         </div>
 
       </form>
+      <center>
       <div class="form-group" id="hideForget">
         <a href="#" class="ForgetPwd">Forget Password?</a>
         <div><span >OR</span></div>
         <div>
           <a
-            style=" display: flex;
-    justify-item: end;
-"
-            class="btnotp"
+            class=" btn btn-primary btnotp"
             href="/user-otp"
           >OTP</a></div>
       </div>
+      </center>
       <div>
         <a href="/signup" style="font-size: small; margin-top: 50px;">Dont have
           an Account?</a>
@@ -60,3 +69,18 @@
     </div>
   </div>
 </div>
+<script>
+  function validateLogin(){
+    let email=document.mysignup.email.value;
+    let password=document.mysignup.password.value;
+    if(email==null || email==''){
+      document.getElementById('emailerr').innerHTML='Email require'
+       return false;
+    }else if(password==null || password==''){
+      document.getElementById('passworderr').innerHTML="password not require"
+      return false;
+    }else{
+      return true
+    }
+  }
+</script>

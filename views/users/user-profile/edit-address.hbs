@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="billing-form mb-3">
+    <h4>Edit Address</h4>
+    <form action="/edit-addres" method="POST">
+{{#each Address}}
+      <div class="row">
+        <div class="col-lg-3 align-items-center">
+          <label>COUNTRY *</label>
+        </div>
+        <div class="col-lg-9">
+          <select name="country">
+            <option>India</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <label>FIRST NAME *</label>
+        </div>
+        <div class="col-lg-9">
+          <input name="fname" type="text"  value="{{this.addressDetails.fname}}"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <label>LAST NAME *</label>
+        </div>
+        <div class="col-lg-9">
+          <input name="lname" type="text" value="{{this.addressDetails.l-name}}"/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3">
+          <label>ADDRESS *</label>
+        </div>
+        <div class="col-lg-9">
+          <input name="address" type="text"  value="{{this.addressDetails.address}}" />
+          <input
+            name="address"
+            type="text"
+        value="{{this.addressDetails.address}}"
+            class="mt-sm-30"
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <label>TOWN / CITY *</label>
+        </div>
+        <div class="col-lg-9">
+          <input name="towncity" type="text" value="{{this.addressDetails.towncity}}"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <label>COUNTRY / STATES</label>
+        </div>
+        <div class="col-lg-9">
+          <input name="countrycity" type="text" value="{{this.addressDetails.countrycity}}" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-3">
+          <label>POSTCODE / ZIP *</label>
+        </div>
+        <div class="col-lg-9">
+          <input name="pincode" type="text" value="{{this.addressDetails.pincode}}"/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-3">
+          <label>PHONE *</label>
+        </div>
+        <div class="col-lg-9">
+          <input name="phone" type="text" value="{{this.addressDetails.phone:}}" />
+        </div>
+        <div class="d-flex">
+          <div><label for="html">Office</label>
+            <input type="radio" name="place" value="office" /></div>
+          <div>
+            <label for="css">Home</label>
+            <input type="radio" name="place" value="home"/></div>
+        </div>
+      </div>
+      <input type="text" value="{{this._id}}" name="id" hidden>
+      <div class="text-center mb-2"><button
+      type="submit"
+          class="w-25 btn btn-success"
+        >submit</button></div>
+        {{/each}}
+    </form>
+  </div>
+
+</div> 

@@ -1,7 +1,20 @@
-	 <form action="/signup" method="POST">
+	 <form action="/signup" method="POST" name="myformOtp" onsubmit="return mysubmit()">
                   <p>{{sighnupotpErr}}</p>
                         <div class="form-group" id="otpText" >
                             <input name="otp" type="text" class="form-control" placeholder="Enter Yout OTP" value="" />
+                            <p class="text-danger" id="numerr"></p>
 							<input type="submit">
                         </div>
               </form>
+
+              <script>
+  function mysubmit(){
+    let otp=document.myformOtp.otp.value;
+    if(otp==null || otp==''){
+      document.getElementById('numerr').innerHTML='Number require'
+       return false;
+    }else{
+      return true
+    }
+  }
+</script>

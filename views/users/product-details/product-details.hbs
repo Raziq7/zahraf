@@ -1,5 +1,5 @@
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 {{!-- <div class="modal fade" id="quick-view" tabindex="-1" role="dialog" aria-hidden="true"> --}}
 		<div >
 			<div class="modal-content">
@@ -12,7 +12,10 @@
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="tab-content">
-								<div id="product-1" class="tab-pane fade in show active">
+								<div class="col-12">
+							<div class="previewPane"></div>
+							</div>
+								{{!-- <div id="product-1" class="tab-pane fade in show active">
 									<div class="product-details-thumb">
 										<img src="/product-image/{{productResponse._id}}image.png" alt="" />
 									</div>
@@ -25,17 +28,18 @@
 								<div id="product-3" class="tab-pane fade">
 									<div class="product-details-thumb">
 										<img src="/product-image/{{productResponse._id}}image2.png" alt="" />
-									</div>
-								</div>
+									</div> --}}
+								{{!-- </div> --}}
 							</div>
 							<ul class="nav nav-tabs products-nav-tabs horizontal quick-view mt-10">
-								<li><a class="active" data-toggle="tab" href="#product-1"><img src="/product-image/{{productResponse._id}}image.png" alt="" /></a></li>
-								<li><a data-toggle="tab" href="#product-2"><img src="/product-image/{{productResponse._id}}image1.png" alt="" /></a></li>
-								<li><a data-toggle="tab" href="#product-3"><img src="/product-image/{{productResponse._id}}image2.png" alt="" /></a></li>
+								<li><a class="active" data-toggle="tab" href="#product-1"><img class="imgkey" src="/product-image/{{productResponse._id}}image.png" alt="" /></a></li>
+								<li><a data-toggle="tab" href="#product-2"><img class="imgkey" src="/product-image/{{productResponse._id}}image1.png" alt="" /></a></li>
+								<li><a data-toggle="tab" href="#product-3"><img class="imgkey" src="/product-image/{{productResponse._id}}image2.png" alt="" /></a></li>
 							</ul>
 						</div>
 						<div class="col-lg-8">
 							<div class="row">
+								<div id="zoomer"></div>
 								<div class="col-lg-8">
 									<div class="product-details-desc">
 										<h2>{{productResponse.name}}</h2>
@@ -44,7 +48,7 @@
 											<li>{{productResponse.description1}}</li>
 											<li>{{productResponse.description2}}</li>
 										</ul>
-										<div class="product-meta">
+										{{!-- <div class="product-meta">
 											<ul class="list-none">
 												<li>SKU: 00012 <span>|</span></li>
 												<li>Categories:
@@ -65,7 +69,7 @@
 											<a href="#"><i class="fa fa-twitter"></i></a>
 											<a href="#"><i class="fa fa-google-plus"></i></a>
 											<a href="#"><i class="fa fa-rss"></i></a>
-										</div>
+										</div> --}}
 									</div>
 								</div>
 								<div class="col-lg-4">
@@ -74,10 +78,15 @@
 											<a href="#"><i class="ti-truck"></i> Free Delivery</a>
 										</div>
 										<div class="product-price-rating">
+											{{#if productResponse.offer}}
 											<div>
-												<del>629.99</del>
+												<del>{{productResponse.oldPrice}}</del>
 											</div>
-											<span>{{productResponse.price}}</span>
+											<span>₹{{productResponse.price}}</span>
+											{{else}}
+												<span>₹{{productResponse.price}}</span>
+
+											{{/if}}
 											<div class="pull-right">
 												<i class="fa fa-star"></i>
 												<i class="fa fa-star"></i>
@@ -86,7 +95,7 @@
 												<i class="fa fa-star-o"></i>
 											</div>
 										</div>
-										<div class="product-colors mt-20">
+										{{!-- <div class="product-colors mt-20">
 											<label>Select Color:</label>
 											<ul class="list-none">
 												<li>white</li>
@@ -94,14 +103,14 @@
 												<li>Blue</li>
 											</ul>
 											
-										</div>
-										<div class="product-quantity mt-15">
+										</div> --}}
+										{{!-- <div class="product-quantity mt-15">
 											<label>Quatity:</label>
 											<input type="number" value="1" />
-										</div>
+										</div> --}}
 										<div class="add-to-get mt-50">
 											<a onclick="addToCart('{{productResponse._id}}')" class="add-to-cart">Add to Cart</a>
-											<a href="#" class="add-to-cart compare"><i class="icon_heart_alt"></i>ADD to Wishlist</a>
+											<a onclick="addToWishlist('{{productResponse._id}}')"  href="#" class="add-to-cart compare"><i class="icon_heart_alt"></i>ADD to Wishlist</a>
 										</div>
 									</div>
 								</div>
@@ -112,3 +121,26 @@
 			</div>
 		</div>
 	{{!-- </div> --}}
+	<style>
+		.imgkey{width:50px;height:50px;border:1px solid #ddd;}
+.previewPane{display:inline-block;border:1px solid #ddd;width:250px;height:240px;cursor:crosshair;background-repeat:no-repeat;background-position:center;background-size:100% 100%}
+#zoomer{display:none;background-repeat:no-repeat;border:1px solid #ddd;width:500px;height: 500px;z-index:1000;}
+	</style>
+
+	<script>
+		$(function(){
+$('.previewPane, #zoomer').css('background-image','url('+$('.imgkey').first().attr('src')+')');
+$('.imgkey').click(function(){
+$('.previewPane').css('background-image','url('+$(this).attr('src')+')');
+			});
+$('.previewPane').mousemove(function(ev){
+$('#zoomer').css('display','inline-block');
+var img = $(this).css('background-image').replace(/^url\(['"](.+)['"]\)/, '$1');
+var posX = ev.offsetX ? (ev.offsetX) : ev.pageX - $(this).offset().left;
+var posY = ev.offsetY ? (ev.offsetY) : ev.pageY - $(this).offset().top;
+$('#zoomer').css('background-position',((-posX * 9.9) + "px " + (-posY * 9.9) + "px"));
+$('#zoomer').css('background-image','url('+img+')');
+			});
+$('.previewPane').mouseleave(function(){$('#zoomer').css('display','none');});
+		});
+	</script>

@@ -1,13 +1,19 @@
 const { response } = require("express");
+const dotenv = require('dotenv')
 var express = require("express");
 const productHelpers = require("../Helpers/product-helpers");
 var router = express.Router();
 var ProductHelpers = require("../Helpers/product-helpers");
+dotenv.config()
 var userHelpers = require("../Helpers/user-helpers");
-var serviseSID = "VA36fa120a3c7a3e7398782d574b5abf16";
-var accountSID = "AC004073380f5c23a606371bbbc0e1fc3e";
-var authTocken = "ccb4cb4ab95e2ffb0938038dc2958b74";
-var client = require("twilio")(accountSID, authTocken);
+var client = require("twilio")(process.env.ACCOUNT_SID, process.env.AUTH_TOCKEN);
+
+const paypal = require('paypal-rest-sdk');
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live
+  'client_id': 'AYdjMGuUF787WLH5V6EMGoSz6nT3HDrZtwKuI5SU8or93aFNR7iOrL_3vi-f4_7v2GpBO7I0rYARi3EF',
+  'client_secret': 'ELNi2eafvFbWYfQMtdTeKDTwZVHkaE3ojUUatOv-QL-GK_gaGBoZqrL6yml8gQFXs8QWHZU6aOdMnPEc'
+});
 // session
 let isSession = (req, res, next) => {
   if (req.session.logedIn) {
@@ -20,19 +26,34 @@ let isSession = (req, res, next) => {
 router.get("/", async function(req, res, next) {
 
   let cartCount=null;
+  let wishlistCount=null;
   let total=null;
+  console.log(req.session.user,"*********raziq hear***/-+");
   if(req.session.user){
     
      total=await userHelpers.checkoutTotal(req.session.user._id)
 
     cartCount= await ProductHelpers.getCartCount(req.session.user._id)
+    wishlistCount= await ProductHelpers.getWishlistCount(req.session.user._id)
+
     console.log(cartCount);
 }
 
 
-  ProductHelpers.viewProducts().then((product) => {
+  ProductHelpers.viewProducts().then(async(product) => {
+    // let findoffer=await ProductHelpers.offerFind()
+    // console.log(findoffer[0].categoryDetails.category);
+    // let offerPro=await ProductHelpers.findOfferProduct(findoffer[0].categoryDetails.category)
+    // console.log(findoffer);
+   let banner=await ProductHelpers.bannerfind()
+   let firstsmallbanner=await ProductHelpers.smallBannerfind1()
+   let secondsmallbanner=await ProductHelpers.smallBannerfind2()
+   let thirdsmallbanner=await ProductHelpers.smallBannerfind3()
+   let fourthsmallbanner=await ProductHelpers.smallBannerfind4()
+
     let userlog = req.session.user;
-    res.render("users/index", { user: true, product,userlog,productResponse:req.session.productResponse,cartCount,total});
+   let categoryView=await ProductHelpers. categoryfind()
+    res.render("users/index", { user: true, product,userlog,productResponse:req.session.productResponse,cartCount,total,banner,wishlistCount,categoryView,firstsmallbanner,secondsmallbanner,thirdsmallbanner,fourthsmallbanner});
   });
 });
 router.get("/login", (req, res) => {
@@ -74,31 +95,34 @@ router.get('/submitotp',(req,res)=>{
 })
 // send otp signup
 router.post("/submitotp", async (req, res) => {
-
+  
   if (req.body.password == req.body.confirm) {
     let response = await userHelpers.doSignup(req.body);
-
+    
     if (!response) {
-
+      
       req.session.name = req.body.name;
       req.session.phone = req.body.phone;
       req.session.password = req.body.password;
       req.session.email = req.body.email;
       req.session.address = req.body.address;
-
       req.session.phone = req.body.phone;
-
+      console.log('hello boys');
       client.verify
-        .services(serviseSID)
-        .verifications.create({
-          to: `+91${req.session.phone}`,
-          channel: "sms",
-        })
-       .then((response) => {
-         console.log(req.body);
-          if (response.status === "pending") {
-            res.redirect("/login-otp");
-          } else {
+      .services(process.env.SERVICE_ID)
+      .verifications.create({
+        to: `+91${req.session.phone}`,
+        channel: "sms",
+        
+      })
+      
+      .then((response) => {
+        
+        
+        if (response.status === "pending") {
+          
+          res.redirect("/login-otp");
+        } else {
             req.session.otpErr = "otp messege sending failed please try again";
             res.redirect("/signup");
           }
@@ -115,10 +139,75 @@ router.post("/submitotp", async (req, res) => {
 
 // verify otp signup
 router.post("/signup", (req, res) => {
+  console.log("signup hello");
   const otp = req.body.otp;
   try {
     client.verify
-      .services(serviseSID)
+      .services(process.env.SERVICE_ID)
+      .verificationChecks.create({
+        to: `+91${req.session.phone}`,
+        code: otp,
+      })
+      .then(async(result) => {
+        if (result.status === "approved") {
+          let userData = {
+            name: req.session.name,
+            phone: req.session.phone,
+            password: req.session.password,
+            email: req.session.email,
+            address: req.session.address, 
+          };
+          let response= await userHelpers.doSuccess(userData)
+          let id=response.insertedId
+          let userSession=await userHelpers.findUser(id)
+          console.log("userSession",userSession);
+          req.session.user=userSession
+          req.session.logedIn=true
+            res.redirect("/");
+
+        } else {  
+          req.session.sighnUpcodeErr = "incorrect otp";
+          res.redirect("/submitotp");
+        }
+      });
+  } catch (err) {
+    req.session.sighnUpcodeErr = "incorrect otp";
+    res.redirect("/submitotp");
+  }
+});
+
+///resend-signup-otp-start
+//send Otp
+router.get("/resend-signup-otp", (req, res) => {
+  console.log("signup hello");
+  client.verify
+  .services(process.env.SERVICE_ID)
+  .verifications.create({
+    to: `+91${req.session.phone}`,
+    channel: "sms",
+    
+  })
+  
+  .then((response) => {
+    console.log(req.body);
+    
+    if (response.status === "pending") {
+      
+      res.redirect("/login-otp");
+    } else {
+        req.session.otpErr = "otp messege sending failed please try again";
+        res.redirect("/signup");
+      }
+    });
+});
+
+//get Otp-submitOtp
+router.post("/resend-signup-otp", (req, res) => {
+  console.log("signup get Otp");
+  const otp = req.body.otp;
+  try {
+    client.verify
+      .services(process.env.SERVICE_ID)
       .verificationChecks.create({
         to: `+91${req.session.phone}`,
         code: otp,
@@ -130,15 +219,17 @@ router.post("/signup", (req, res) => {
             phone: req.session.phone,
             password: req.session.password,
             email: req.session.email,
-            address: req.session.address,
+            address: req.session.address, 
           };
-          console.log(userData);
-          userHelpers.doSuccess(userData).then((response) => {
+          userHelpers.doSuccess(userData).then(async(response) => {
+            let id=response.insertedId
+            let userSession=await userHelpers.findUser(id)
+            console.log("userSession",userSession);
+            req.session.user=userSession
             console.log("njan responsasa...............",response);
-            req.session.user = userData;
             res.redirect("/");
           });
-        } else {
+        } else {  
           req.session.sighnUpcodeErr = "incorrect otp";
           res.redirect("/submitotp");
         }
@@ -148,6 +239,8 @@ router.post("/signup", (req, res) => {
     res.redirect("/submitotp");
   }
 });
+
+///resend-signup-otp-end
 
 
 router.post("/login",async(req, res) => {
@@ -202,7 +295,7 @@ userHelpers.otpVeryfication(req.body.phone).then((response)=>{
   if(response.status){
     req.session.user=response.user
     client.verify
-        .services(serviseSID)
+        .services(process.env.SERVICE_ID)
         .verifications.create({
           to: `+91${req.session.phone}`,
           channel: "sms",
@@ -219,7 +312,7 @@ userHelpers.otpVeryfication(req.body.phone).then((response)=>{
     req.session.otpNumberErr="this number not register"
     res.redirect("/user-otp")
   }
- 
+
 })
 });
 
@@ -228,7 +321,7 @@ console.log(req.session.user);
   const otp = req.body.otp;
   try {
     client.verify
-      .services(serviseSID)
+      .services(process.env.SERVICE_ID)
       .verificationChecks.create({
         to: `+91${req.session.user.phone}`,
         code: otp,
@@ -245,6 +338,27 @@ console.log(req.session.user);
   res.redirect("/login-otp");
 }
 });
+
+
+///resend-send-login-Otp
+router.get('/resend-login-otp',(req,res)=>{
+  console.log("hello guys I am a resend");
+   client.verify
+        .services(process.env.SERVICE_ID)
+        .verifications.create({
+          to: `+91${req.session.phone}`,
+          channel: "sms",
+        })
+       .then((response) => {
+          if (response.status === "pending") {
+            res.redirect("/user-otp-login");
+          } else {
+            req.session.otpErr = "otp messege sending failed please try again";
+            res.redirect("/login-otp");
+          }
+})
+})
+
 // otp-end
 
 
@@ -255,39 +369,33 @@ router.get('/productDetails/',(req,res)=>{
   console.log("njan ivde ethi");
   ProductHelpers.productDetails(req.query.id).then((productResponse)=>{
     res.render('users/product-details/product-details',{user:true,productResponse})
-    let image =req.files.image
-    image.mv('./public/product-image/'+req.query.id+".png")
+    // console.log(req.files);
+    // let image =req.files.image;
+    // image.mv('./public/product-image/'+req.query.id+".png")
   })
 });
 
-// user-profile Edit
-// router.get("/user-edit/",(req, res) => {
-//   userHelpers.editUser(req.query.id).then((responseId)=>{
-//     console.log(responseId);
-//     res.render("admin/user-managment/user-edit", {responseId, admin: true});
-//   })
-//   });
-//   router.post('/edit-user/',(req,res)=>{
-//     userHelpers.updateUser(req.query.id,req.body)
-//   })
+
  
 // shopping
- router.get('/shopping',(req,res)=>{
-   console.log("hello");
-   res.render('users/shopping/shopping',{user:true})
- });
+//  router.get('/shopping',(req,res)=>{
+//    console.log("hello");
+//    res.render('users/shopping/shopping',{user:true})
+//  });
 
 //  add-to-cart
 router.get('/showCart',isSession,async(req,res)=>{
+  console.log("************",req.session.user);
  let response=await userHelpers.CollectionCart(req.session.user._id)
-    let totalValue=await userHelpers.checkoutTotal(req.session.user._id)
-    console.log(response);
-    res.render('users/shopping/addToCart',{user:true,response,user:req.session.user._id,totalValue})
+ let totalValue=await userHelpers.checkoutTotal(req.session.user._id)
+ let SubTotal=await userHelpers.checkoutSubtotal(req.session.user._id)
+
+    res.render('users/shopping/addToCart',{user:true,userlog:req.session.user,response,user:req.session.user._id,totalValue,SubTotal})
   
 })
-
-router.get('/addtocart/:id',(req,res)=>{
-  console.log("hi");
+ 
+router.get('/addtocart/:id',isSession,(req,res)=>{
+  console.log("njan add to cart");
   let userId=req.session.user;
   console.log(userId);
   userHelpers.addToCart(req.params.id,userId._id).then(()=>{
@@ -295,10 +403,26 @@ router.get('/addtocart/:id',(req,res)=>{
    res.json({status:true})
   })
 });
+//addtowishlist
+router.get('/addtowishlist/:id',isSession,async(req,res)=>{
+  let userId=req.session.user;
+console.log(req.params.id,"/***9*996638*965*969**--*-/");
+ let result=await userHelpers.addToWshlist(req.params.id,req.session.user._id)
+ if(result.productExist){
+  res.json({productExist:true})
+ }else{
+   res.json({status:true})
+ }
+
+
+})
 router.post('/change-product-quantity',(req,res)=>{
   console.log("req.body",req.body);
   userHelpers.changeProductQuantity(req.body).then(async(response)=>{
+    
+    response.SubTotal=await userHelpers.checkoutChangeSubtotal(req.body.user)
     response.total=await userHelpers.checkoutTotal(req.body.user)
+
     res.json(response)
   })
 });
@@ -312,43 +436,360 @@ router.post('/remove-cart',(req,res)=>{
 router.get('/checkout',isSession,async(req,res)=>{
   console.log("hello checkkout");
  let total=await userHelpers.checkoutTotal(req.session.user._id)
- let adress=await userHelpers.findAddress()
- res.render('users/shopping/checkout',{user:true,total,user:req.session.user,adress})
-
+ let adress=await userHelpers.findAddress(req.session.user._id)
+ let couponDiscountPrice=req.session.couponDiscountPrice
+ let couponTrue=req.session.couponTrue
+//  let couponExist=req.session.couponExist
+ let noCoupon=req.session.noCoupon
+ let coupons=await ProductHelpers.showCoupon()
+ res.render('users/shopping/checkout',{user:true,total,userlog:req.session.user,user:req.session.user,adress,couponDiscountPrice,couponTrue,noCoupon,coupons})
+//  req.session.couponExist=null
+ req.session.noCoupon=null
 });
 router.post('/place-order',async(req,res)=>{
+  console.log(req.body);
   let product =await userHelpers.getCartProduct(req.body.userId)
  let totalPrice=await userHelpers.checkoutTotal(req.body.userId)
- userHelpers.placeOrder(req.body,product,totalPrice).then((result)=>{
-   res.json({status:true})
- })
-  console.log(req.body);
-});
+ console.log("totalPrice",totalPrice);
+ console.log("req.body",req.body);
+ console.log("product",product);
 
+ if(req.session.couponTrue){
+  totalPrice=req.session.couponDiscountPrice
+ }
+
+ userHelpers.placeOrder(req.body,product,totalPrice).then(async(orderId)=>{
+  req.session.orderId=orderId
+   if(req.body['pay-method']=="COD"){
+     userHelpers.deleteCart(req.body)
+     await userHelpers.couponCodeExist(req.session.user._id,req.session.coupunCode,req.session.couponDiscountPrice)
+     await  userHelpers.decrementproduct(req.session.user._id,req.session.orderId)
+        req.session.couponDiscountPrice=null
+        req.session.couponTrue=null
+     res.json({codSuccess:true})
+   }else if(req.body['pay-method']=="razorPay"){
+   
+    userHelpers.generateRazorPay(orderId,totalPrice,req.session.user._id,req.session.couponTrue,req.session.couponDiscountPrice).then(async(response)=>{
+      await userHelpers.couponCodeExist(req.session.user._id,req.session.coupunCode,req.session.couponDiscountPrice)
+      
+        req.session.couponDiscountPrice=null
+        req.session.couponTrue=null
+      res.json(response)
+    })
+   }
+else if(req.body['pay-method']=='paypal'){
+  req.session.orderId=orderId
+  console.log("*****/***//879896245");
+  res.json({paypalstatus:true})
+   }
+ })
+})
+//paypal start
+router.get('/pay', async(req, res) => {
+  if(req.session.couponTrue){
+    var indtotal=req.session.couponDiscountPrice/75
+    indtotal=parseInt(indtotal) 
+    console.log(indtotal);
+  }else{
+    var total=await userHelpers.checkoutTotal(req.session.user._id)
+    var indtotal=total.total/75
+    indtotal=parseInt(indtotal)
+    console.log(indtotal);
+  }
+
+
+  req.session.indtotal=indtotal
+  const create_payment_json = {
+    "intent": "sale", 
+    "payer": {
+        "payment_method": "paypal"
+    },
+    "redirect_urls": {
+        "return_url": "http://localhost:3000/success",
+        "cancel_url": "http://localhost:3000/cancel"
+    },
+    "transactions": [{ 
+        "item_list": {
+            "items": [{
+                "name": "zahraf Products",
+                "sku": "001",
+                "price": indtotal,
+                "currency": "USD",
+                "quantity": 1
+            }] 
+        },
+        "amount": {
+            "currency": "USD",
+            "total": indtotal
+        },
+        "description": "Product for the best team ever"
+    }]
+};
+
+paypal.payment.create(create_payment_json, function (error, payment) {
+  if (error) {
+    console.log(error);
+      throw error;
+  } else {
+      for(let i = 0;i < payment.links.length;i++){
+        if(payment.links[i].rel === 'approval_url'){
+          res.redirect(payment.links[i].href);
+        }
+      }
+  } 
+}); 
+
+});
+router.get('/success', async(req, res) => {
+  let indtotal=req.session.indtotal 
+  let total=await userHelpers.checkoutTotal(req.session.user._id)
+  total=total/75
+  console.log('errrorrrrrrrrrr');
+  const payerId = req.query.PayerID;
+  const paymentId = req.query.paymentId;
+
+  const execute_payment_json = {
+    "payer_id": payerId,
+    "transactions": [{
+        "amount": {
+            "currency": "USD",
+            "total": indtotal
+        }
+    }]
+  };
+
+  paypal.payment.execute(paymentId, execute_payment_json,async function (error, payment) {
+    if (error) {
+        console.log(error.response);
+        throw error;
+    } else {
+     let order=await userHelpers.orderIdPick(req.session.orderId)
+     console.log("Razi m......r.r.r.r.r.r",order._id);
+     userHelpers.changePaymentStatus(order._id,req.session.user._id)
+      userHelpers.deleteCart(order)
+        console.log(JSON.stringify(payment));
+       await userHelpers.couponCodeExist(req.session.user._id,req.session.coupunCode,req.session.couponDiscountPrice)
+       await  userHelpers.decrementproduct(req.session.user._id,req.session.orderId)
+        req.session.couponDiscountPrice=null
+        req.session.couponTrue=null
+        res.redirect('/order-sucess');
+    }
+});
+});
+router.get('/cancel', (req, res) => res.send('Cancelled'));
+//paypal end
 router.get('/address',(req,res)=>{
-  res.render('users/shopping/user-address',{user:true})
+  let userlog = req.session.user;
+  res.render('users/shopping/user-address',{user:true,userlog})
 });
 router.post('/add-addres',(req,res)=>{
   console.log(req.body);
-  userHelpers.addAddress(req.body).then((result)=>{
+  userHelpers.addAddress(req.body,req.session.user._id).then((result)=>{
     console.log(result);
-    res.redirect('/address')
+    res.redirect('/myprofile')
   })
 });
-
-router.get('/order-sucess',(req,res)=>{
+router.post('/add-address',(req,res)=>{
+  console.log(req.body);
+  userHelpers.addAddress(req.body,req.session.user._id).then((result)=>{
+    console.log(result);
+    res.redirect('/checkout')
+  })
+});
+router.get('/order-sucess',isSession,(req,res)=>{
+  let userlog = req.session.user;
   res.render('users/shopping/order-success',{user:true})
+  
 });
 
 router.get('/product-details',isSession,async(req,res)=>{
-  console.log("njan  /product-details");
+  let userlog = req.session.user;
   let orders=await userHelpers.showOrderDetails(req.session.user._id)
-  console.log(orders);
-res.render('users/shopping/view-order-products',{user:true,orders})
+res.render('users/shopping/view-order-products',{user:true,orders,userlog})
   
+});
+
+router.post('/cancelProOrder',isSession,(req,res)=>{
+  userHelpers.cancelOrder(req.body.orderId,req.body.orderProId,req.session.user._id)
+});
+router.post('/viewProOrder',isSession,async(req,res)=>{
+ let viewPro =await userHelpers.viewProOrder(req.body.orderId,req.body.orderProId,req.session.user._id)
+ req.session.viewPro=viewPro
+ res.json({status:true})
 })
+router.get('/viewProOrder',isSession,async(req,res)=>{
+  // let viewPro =await userHelpers.viewProOrder(req.body.orderId,req.body.orderProId,req.session.user._id)
+  res.render('users/shopping/single-Product-details',{user:true,userlog:req.session.user,viewPro:req.session.viewPro})
 
+ })
+//razorpay
+router.post('/verify-payment',(req,res)=>{
+  console.log("465465/**/*/*/*/*/*/*/*/",req.body);
+  userHelpers.verifyPayment(req.body).then((reponse)=>{
+    
+    userHelpers.changePaymentStatus(req.body['order[receipt]'],req.session.user._id).then(async(result)=>{
+      await  userHelpers.decrementproduct(req.session.user._id,req.session.orderId)
+      res.json({status:true})
+    })
+  }).catch((err)=>{
+    console.log(err);
+    res.json({status:false,errMsg:""})
+  })
+})
+    //user-profile
+router.get("/myprofile",isSession,async(req, res) => {
+  let adress=await userHelpers.findAddress(req.session.user._id)
+  let getUser= await userHelpers.viewUserProfile(req.session.user._id)
+  console.log("$match/*/*/*",adress);
+  let image=false
+  if(req.session.files){
 
+    image=req.session.files
+  }
+ res.render("users/user-profile/user-profile-edit", {userlog:req.session.user, user: true,getUser,adress,image});
+  });
+  router.get("/edit-userProfile",isSession,async(req,res)=>{
+  let getUser= await userHelpers.viewUserProfile(req.session.user._id)
+    res.render('users/user-profile/editUserProfile',{userlog:req.session.user, user: true,getUser})
+  })  
+  router.post('/submit-editPro',isSession,async(req,res)=>{
+    let usersuccedit=await userHelpers.updateUser(req.session.user._id,req.body)
+   let files;
+    if(req.files){
+      req.session.files=true
+    }else{
+      req.session.files=false
+    }
+    res.redirect('/myprofile')
+    let myrproimage =req.files.myrproimage;
+    myrproimage.mv('./public/Profile-image/'+req.session.user._id+".png")
 
+  })
+  router.get('/change-password',isSession,(req,res)=>{
+    res.render('users/user-profile/change=password',{userlog:req.session.user,user: true,passErr:req.session.passErr,oldPass:req.session.oldPass})
+    req.session.passErr=null;
+    req.session.oldPass=null;
+  });
+  router.post('/changed-password',isSession,async(req,res)=>{
+    console.log(req.body)
+    if(req.body.newPass===req.body.conf){
+      let isUser=await userHelpers.changedPassword(req.body,req.session.user._id)
+      if(isUser.status){
+        res.redirect('/myprofile')
+      }else{
+        req.session.oldPass='You Entered Wrong Old Password'
+       res.redirect('/change-password')
+        
+      }
+    }else{
+      req.session.passErr='password dosent match'
+      res.redirect('/change-password')
+    }
+  })
+  //wishlist  
+  router.get('/wishlist',isSession,async(req,res)=>{
+    let wishlistPro=await userHelpers.CollectionWishlist(req.session.user._id)
+    console.log("789664*/-+",wishlistPro);
+    res.render('users/shopping/wishlist',{user:true,wishlistPro,userlog:req.session.user})
+  })
+  router.post('/remove-wishlist',(req,res)=>{
+    console.log('hellloloolio shibuuuuuuuuuuuuuuuuuuuu/*98+9');
+    userHelpers.removeWishlist(req.body).then((response)=>{
+      res.json(response)
+    })
+  })
+  router.get('/editAdress',isSession,async(req,res)=>{
+    console.log(req.query.id);
+    let Address=await userHelpers.editAddress(req.query.id)
+    console.log(Address);
+    res.render('users/user-profile/edit-address',{user:true,userlog:req.session.user,Address})
+  });
+  router.post('/edit-addres',async(req,res)=>{
+    console.log(req.body);
+   let response=await userHelpers.modifyAddress(req.body)
+   res.redirect('/myprofile')
+  });
+  //coupon
+  router.post('/applycoupon',isSession,async(req,res)=>{
+    console.log(req.body.coupunCode);
+    console.log(req.session.user);
+    let chechcoupon= await userHelpers.chechCoupon(req.body.coupunCode,req.session.user._id)
+    if(chechcoupon){
+      let discount= chechcoupon.discount  
+      let couponDiscountPrice= await userHelpers.getCoupon(req.body.coupunCode,req.session.user._id,discount)
+      console.log("******8943512209",couponDiscountPrice);
+   let couponExist=await userHelpers.checkcCouponExist(req.body.coupunCode,req.session.user._id,couponDiscountPrice)
       
+  //  console.log("couponExit//**/",couponExist);
+      if(couponExist.status){
+        // req.session.couponExist="Coupon Already Applied"
+        // res.redirect('/checkout')
+        res.json({status:true})
+      }else{
+        req.session.coupunCode=req.body.coupunCode
+        console.log("hello");
+        req.session.couponDiscountPrice=couponDiscountPrice;
+        req.session.couponTrue=true
+        // res.redirect('/checkout')
+        res.json({couponDiscountPrice})
+
+      }
+
+    }else{
+      req.session.noCoupon="No Discount for This Coupon"
+      res.redirect('/checkout')
+    }
+  });
+   
+  router.get('/coupon-apply',async(req,res)=>{
+    let coupons=await ProductHelpers.showCoupon()
+    console.log(coupons);
+  res.render('users/offer/couponOffer',{user:true,userlog:req.session.user,coupons})
+  })
+//search
+router.post('/search',(req,res)=>{
+  console.log(req.body); 
+  userHelpers.searchProduct(req.body.content).then(async(showPro)=>{
+   let viewPro=await ProductHelpers.viewProducts()
+    res.render('users/shopping/shopping',{user:true,showPro,userlog:req.session.user,viewPro})
+  })
+});
+router.get('/showCategoryPro/',async(req,res)=>{
+  console.log(req.query.id);
+  var product;
+    if(req.session.sort){
+      req.session.sort=false
+      product= req.session.viewPro
+    }else if(req.session.pricesort){
+      req.session.pricesort=false
+      product=req.session.textsort
+      console.log(product);
+
+
+    }else{
+      product=await userHelpers.findCategoryPro(req.query.id)
+    }
+    let viewPro=await ProductHelpers.viewProducts()
+    res.render('users/shopping/product-parchase',{user:true,userlog:req.session.user,product,viewPro})
+ 
+});
+
+router.get('/alphaSort',async(req,res)=>{
+  let viewPro=await userHelpers.findSortPro()
+  req.session.sort=true
+  req.session.viewPro=viewPro
+  res.redirect('/showCategoryPro')
+});
+router.get('/textSort',async(req,res)=>{
+  console.log('hello guys');
+  let viewPro=await userHelpers.PriceSort()
+  req.session.textsort=viewPro
+  req.session.pricesort=true
+  res.redirect('/showCategoryPro')
+})
+//filter
+// router.post('/priceFilter',(req,res)=>{
+//   console.log("*****priceFilter***",req.body)
+//   user
+// })
 module.exports = router;

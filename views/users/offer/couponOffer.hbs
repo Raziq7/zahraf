@@ -1,0 +1,55 @@
+<style>
+
+.coupon {
+  position: relative;
+  width: 400px;
+  height: 160px;
+  margin: 50px auto;
+  background-image: 
+    radial-gradient(circle at 1px 8px, transparent 6px, #6fb825 6px, #6fb825 0px), 
+    radial-gradient(circle at 199px 8px, transparent 6px, #6fb825 6px, #6fb825 0px);
+  background-size: 200px 18px;
+  background-position: 0 0, 200px 0;
+  background-repeat-x: no-repeat;
+  font-size: 30px;
+  color: #fff;
+  font-weight: bold;
+  line-height: 160px;
+  padding-left: 60px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.coupon::before {
+  position: absolute;
+  content: "";
+  left: 240px;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  border-left: 1px dashed #fff;
+}
+.coupon::after {
+  position: absolute;
+  content: "Take Coupon";
+  font-size: 20px;
+  width: 70px;
+  top: 50%;
+  right: 2%;
+  transform: translate(-50%, -50%);
+  line-height: 40px;
+  letter-spacing: 5px;
+}
+
+</style>
+<div class="container">
+  <h1 class="text-center">Your Coupons</h1>
+<div class="row">
+<div class="col-6">
+{{#each coupons}}
+<div class="coupon">{{this.code}}</div>
+{{/each}}
+
+</div>
+
+</div>
+</div>

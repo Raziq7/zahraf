@@ -1,7 +1,12 @@
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <div class="shop-area">
 		<div class="container">
 			<div class="row">
-				<div class="col-xl-3 col-lg-3">
+				{{!-- <div class="col-xl-3 col-lg-3">
 					<div class="sidebar">
 						<div class="vertical-menu">
 							<ul>
@@ -43,18 +48,20 @@
 								<h3>Filter by price</h3>
 							</div>
 							<div class="price_slider_amount">
+								<form action="/priceFilter" method="post">
 								<div class="row align-items-center">
 									<div class="col-lg-6">
 										<input type="text" id="amount" name="price"  placeholder="Add Your Price" />
 									</div>
 									<div class="col-lg-6">
-										<button>Filter</button>
+										<button type="submit">Filter</button>
 									</div>
 								</div>
+								</form>
 							</div>
 							<div id="slider-range"></div>
 						</div>
-						<div class="list-filter mt-43">
+						 <div class="list-filter mt-43">
 							<div class="section-title">
 								<h3>Brands</h3>
 							</div>
@@ -131,8 +138,8 @@
 															<h4><a href="#">Vantech VP-153C Camera</a></h4>
 														</div>
 														<div class="product-price-rating">
-															<span>$195.00</span>
-															<del>$229.99</del>
+															<span>₹195.00</span>
+															<del>₹229.99</del>
 														</div>
 													</div>
 												</div>
@@ -247,7 +254,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
+				<center>
 				<div class="col-xl-9 col-lg-9">
 					<div class="row align-items-center">
 						<div class="col-lg-2">
@@ -258,14 +266,18 @@
 						<div class="col-lg-6">
 							<div class="products-sort">
 								<form>
-									<select>
-										<option>Default Sorting</option>
-										<option>Sort by A - Z</option>
-										<option>Sort Price Low - High</option>
-									</select>
+									    <div class="dropdown">
+  <button type="button" class="btn btn-defult dropdown-toggle" data-toggle="dropdown">
+    Default Sorting
+  </button>
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="/alphaSort">Sort by A - Z</a>
+    <a class="dropdown-item" href="/textSort">Sort Price Low - High</a>
+  </div>
+</div>
 								</form>
 							</div>
-							<div class="products-sort">
+							{{!-- <div class="products-sort">
 								<form>
 									<label>Show :</label>
 									<select>
@@ -274,9 +286,9 @@
 										<option>4</option>
 									</select>
 								</form>
-							</div>
+							</div> --}}
 						</div>
-						<div class="col-lg-4">
+						{{!-- <div class="col-lg-4">
 							<div class="site-pagination pull-right">
 								<ul>
 									<li><a href="#" class="active">1</a></li>
@@ -291,466 +303,70 @@
 									<li><a class="active" data-toggle="tab" href="#list-products"><img src="/assets/images/icons/icon-list.png" alt="" /></a></li>
 								</ul>
 							</div>
-						</div>
+						</div> --}}
 					</div>
 					<div class="tab-content">
 						<div id="grid-products" class="tab-pane">
 							<div class="row">
+							{{#each showPro}}
 								<div class="col-md-4 col-sm-6">
 									<div class="product-single">
 										<div class="product-title">
-											<small><a href="#">Aquaracer</a></small>
-											<h4><a href="#">iPATROL RILEY - WiFi Enabled Mobilized Home Monitoring Robot</a></h4>
+											<small><a href="#">{{this.name}}</a></small>
+											<h4><a href="/productDetails/?id={{this._id}}">{{this.description}} {{this.description1}} {{this.description2}}</a></h4>
 										</div>
 										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/1.jpg" alt="" /></a>
+											<a href="#"><img class="image-fluid" src="/product-image/{{this._id}}image.png" alt="" /></a>
 											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												<a  href="/productDetails/?id={{this._id}}" data-toggle="modal" data-target="#quick-view">quick view</a>
 											</div>
 										</div>
 										<div class="product-price-rating">
 											<div class="pull-left">
-												<span>$395.00</span>
+												{{#if currentPrice}}
+												<del>{{this.currentRupees}}</del>
+												<span>₹{{this.price}}</span>
+												{{else}}
+												<span>₹{{this.price}}</span>
+												{{/if}}
 											</div>
-											<div class="pull-right">
+											{{!-- <div class="pull-right">
 												<i class="fa fa-star-o"></i>
 												<i class="fa fa-star-o"></i>
 												<i class="fa fa-star-o"></i>
 												<i class="fa fa-star-o"></i>
 												<i class="fa fa-star-o"></i>
 												<span class="rating-quantity">(0)</span>
-											</div>
+											</div> --}}
 										</div>
 										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
+											{{!-- <a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a> --}}
+											<a onclick="addToCart('{{this._id}}')" class="add-to-cart">Add to Cart</a>
+											<a onclick="addToWishlist('{{this._id}}')" class="product-wishlist"><i class="ti-heart"></i></a>
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Iphone</a></small>
-											<h4><a href="#">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/2.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$495.00</span>
-											</div>
-											<div class="pull-right">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<span class="rating-quantity">(0)</span>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Camera</a></small>
-											<h4><a href="#">Blue Yeti USB Microphone Blackout Edition</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/3.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$345.00</span>
-												<del>$429.99</del>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Macbook</a></small>
-											<h4><a href="#">iNewby 3.3mm Lens 720P HD WiFi Smart</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/4.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$395.00</span>
-											</div>
-											<div class="pull-right">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Macbook</a></small>
-											<h4><a href="#">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/5.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$195.00 </span>
-												<del>$229.99</del>
-											</div>
-											<div class="pull-right">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Aquaracer</a></small>
-											<h4><a href="#">iPATROL RILEY - WiFi Enabled Mobilized Home Monitoring Robot</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/6.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$395.00</span>
-											</div>
-											<div class="pull-right">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<span class="rating-quantity">(0)</span>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Aquaracer</a></small>
-											<h4><a href="#">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/7.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$495.00</span>
-											</div>
-											<div class="pull-right">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<span class="rating-quantity">(0)</span>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Camera</a></small>
-											<h4><a href="#">Blue Yeti USB Microphone Blackout Edition</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/8.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$345.00</span>
-												<del>$429.99</del>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Macbook</a></small>
-											<h4><a href="#">iNewby 3.3mm Lens 720P HD WiFi Smart</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/9.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Macbook</a></small>
-											<h4><a href="#">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/10.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Aquaracer</a></small>
-											<h4><a href="#">iPATROL RILEY - WiFi Enabled Mobilized Home Monitoring Robot</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/11.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$195.00</span>
-											</div>
-											<div class="pull-right">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<span class="rating-quantity">(0)</span>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Iphone</a></small>
-											<h4><a href="#">Samsung CF591 Series Curved 27-Inch FHD Monitor</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/12.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$495.00</span>
-											</div>
-											<div class="pull-right">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<span class="rating-quantity">(0)</span>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Macbook</a></small>
-											<h4><a href="#">iNewby 3.3mm Lens 720P HD WiFi Smart</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/9.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Macbook</a></small>
-											<h4><a href="#">DYMO LabelWriter 450 Turbo Thermal Label Printer</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/10.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-6">
-									<div class="product-single">
-										<div class="product-title">
-											<small><a href="#">Aquaracer</a></small>
-											<h4><a href="#">iPATROL RILEY - WiFi Enabled Mobilized Home Monitoring Robot</a></h4>
-										</div>
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/11.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-										<div class="product-price-rating">
-											<div class="pull-left">
-												<span>$195.00</span>
-											</div>
-											<div class="pull-right">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<span class="rating-quantity">(0)</span>
-											</div>
-										</div>
-										<div class="product-action">
-											<a href="javascript:void(0);" class="product-compare"><i class="ti-control-shuffle"></i></a>
-											<a href="javascript:void(0);" class="add-to-cart">Add to Cart</a>
-											<a href="javascript:void(0);" class="product-wishlist"><i class="ti-heart"></i></a>
-										</div>
-									</div>
-								</div>
+								{{/each}}
+								
 							</div>
 						</div>
 						<div id="list-products" class="tab-pane active">
+									{{#each showPro}}
 							<div class="product-single wide-style pd-30">
 								<div class="row align-items-center">
 									<div class="col-lg-4">
 										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/16.jpg" alt="" /></a>
+											<a href="#"><img class="image-fluid" src="/product-image/{{this._id}}image.png" alt="" /></a>
 											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
+												<a  href="/productDetails/?id={{this._id}}" data-toggle="modal" data-target="#quick-view">quick view</a>
 											</div>
 										</div>
 									</div>
 									<div class="col-lg-4 product-desc mt-sm-30">
 										<a href="#" class="add-to-wishlist"><i class="icon_heart_alt"></i></a>
 										<div class="product-title style-2">
-											<small><a href="#">Samsung</a></small>
-											<h4><a href="#">Samsung Electronics UN55MU6500 Curved 55-Inch 4K Ultra HD Smart LED TV (2019 Model)</a></h4>
+											<small><a href="#">{{this.name}}</a></small>
+											<h4><a href="/productDetails/?id={{this._id}}">{{this.description}} {{this.description1}} {{this.description2}}</a></h4>
 										</div>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
@@ -764,153 +380,29 @@
 									<div class="col-lg-4 mt-sm-30">
 										<div class="product-action stuck">
 											<div class="free-delivery">
-												<a href="#"><i class="ti-truck"></i> Free Delivery</a>
+												<a ><i class="ti-truck"></i> Free Delivery</a>
 											</div>
 											<div class="product-price-rating">
-												<del>629.99</del>
-												<span>$495.00</span>
+												{{#if currentPrice}}
+												<del>{{this.currentRupees}}</del>
+												<span>₹{{this.price}}</span>
+												{{else}}
+												<span>₹{{this.price}}</span>
+												{{/if}}
 											</div>
 											<div class="product-stock">
 												<p>Avability: <span>In stock</span></p>
 											</div>
-											<a href="#" class="add-to-cart">Add to Cart</a>
-											<a href="#" class="add-to-cart compare">+ ADD to Compare</a>
+											<a onclick="addToCart('{{this._id}}')" class="add-to-cart">Add to Cart</a>
+											{{!-- <a href="#" class="add-to-cart compare">+ ADD to Compare</a> --}}
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="product-single wide-style pd-30">
-								<div class="row align-items-center">
-									<div class="col-lg-4">
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/17.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-4 product-desc mt-sm-30">
-										<a href="#" class="add-to-wishlist"><i class="icon_heart_alt"></i></a>
-										<div class="product-title style-2">
-											<small><a href="#">Samsung</a></small>
-											<h4><a href="#">Samsung Electronics QN55Q8C Curved 55-Inch 4K Ultra HD Smart QLED TV (2019 Model)</a></h4>
-										</div>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
-											<span>(5)</span>
-										</div>
-									</div>
-									<div class="col-lg-4 mt-sm-30">
-										<div class="product-action stuck">
-											<div class="free-delivery">
-												<a href="#"><i class="ti-truck"></i> Free Delivery</a>
-											</div>
-											<div class="product-price-rating">
-												<del>629.99</del>
-												<span>$495.00</span>
-											</div>
-											<div class="product-stock">
-												<p>Avability: <span>In stock</span></p>
-											</div>
-											<a href="#" class="add-to-cart">Add to Cart</a>
-											<a href="#" class="add-to-cart compare">+ ADD to Compare</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="product-single wide-style pd-30">
-								<div class="row align-items-center">
-									<div class="col-lg-4">
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/18.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-4 product-desc mt-sm-30">
-										<a href="#" class="add-to-wishlist"><i class="icon_heart_alt"></i></a>
-										<div class="product-title style-2">
-											<small><a href="#">Samsung</a></small>
-											<h4><a href="#">Samsung Electronics UN65MU8500 Curved 65-Inch 4K Ultra HD Smart LED TV (2017 Model)</a></h4>
-										</div>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
-											<span>(5)</span>
-										</div>
-									</div>
-									<div class="col-lg-4 mt-sm-30">
-										<div class="product-action stuck">
-											<div class="free-delivery">
-												<a href="#"><i class="ti-truck"></i> Free Delivery</a>
-											</div>
-											<div class="product-price-rating">
-												<del>629.99</del>
-												<span>$495.00</span>
-											</div>
-											<div class="product-stock">
-												<p>Avability: <span>In stock</span></p>
-											</div>
-											<a href="#" class="add-to-cart">Add to Cart</a>
-											<a href="#" class="add-to-cart compare">+ ADD to Compare</a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="product-single wide-style pd-30">
-								<div class="row align-items-center">
-									<div class="col-lg-4">
-										<div class="product-thumb">
-											<a href="#"><img src="/assets/images/products/shop/19.jpg" alt="" /></a>
-											<div class="product-quick-view">
-												<a href="javascript:void(0);" data-toggle="modal" data-target="#quick-view">quick view</a>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-4 product-desc mt-sm-30">
-										<a href="#" class="add-to-wishlist"><i class="icon_heart_alt"></i></a>
-										<div class="product-title style-2">
-											<small><a href="#">Samsung</a></small>
-											<h4><a href="#">Samsung CF791 Series 34-Inch Curved Widescreen Monitor (C34F791)</a></h4>
-										</div>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
-											<span>(5)</span>
-										</div>
-									</div>
-									<div class="col-lg-4 mt-sm-30">
-										<div class="product-action stuck">
-											<div class="free-delivery">
-												<a href="#"><i class="ti-truck"></i> Free Delivery</a>
-											</div>
-											<div class="product-price-rating">
-												<del>629.99</del>
-												<span>$495.00</span>
-											</div>
-											<div class="product-stock">
-												<p>Avability: <span>In stock</span></p>
-											</div>
-											<a href="#" class="add-to-cart">Add to Cart</a>
-											<a href="#" class="add-to-cart compare">+ ADD to Compare</a>
-										</div>
-									</div>
-								</div>
-							</div>
+									{{/each}}
 						</div>
 					</div>
-					<div class="row align-items-center mt-30">
+					{{!-- <div class="row align-items-center mt-30">
 						<div class="col-lg-6">
 							<div class="site-pagination">
 								<ul>
@@ -928,7 +420,7 @@
 									<form>
 										<label>Show :</label>
 										<select>
-											<option>12</option>
+											<option>12</option> 
 											<option>8</option>
 											<option>4</option>
 										</select>
@@ -936,7 +428,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> --}}
 					<!--recently-viewed-products-start-->
 					<div class="recent-viewed-products mt-50">
 						<div class="row">
@@ -947,19 +439,20 @@
 							</div>
 						</div>
 						<div class="row recent-products mlr-minus-12">
+							{{#each viewPro}}
 							<div class="col-lg-4">
 								<!--single-product-->
 								<div class="product-single style-2">
 									<div class="row align-items-center">
 										<div class="col-lg-6 p-0">
 											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/2.jpg" alt="" /></a>
+												<a href="/productDetails/?id={{this._id}}"><img src="/product-image/{{this._id}}image.png" alt="" /></a>
 											</div>
 										</div>
 										<div class="col-lg-6 p-0">
 											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
+												<small><a href="#">{{this.name}}</a></small>
+												<h4><a href="/productDetails/?id={{this._id}}">{{this.description}} {{this.description1}}</a></h4>
 											</div>
 											<div class="product-price-rating">
 												<i class="fa fa-star-o"></i>
@@ -969,325 +462,26 @@
 												<i class="fa fa-star-o"></i>
 											</div>
 											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
+												<span>{{this.price}}</span>
+												<del>{{this.currentRupees}}</del>
 											</div>
 										</div>
 									</div>
 								</div>
 								<!--single-product-->
-								<div class="product-single style-2">
-									<div class="row align-items-center">
-										<div class="col-lg-6 p-0">
-											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/4.jpg" alt="" /></a>
-											</div>
-										</div>
-										<div class="col-lg-6 p-0">
-											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
-											</div>
-											<div class="product-price-rating">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-									</div>
-								</div>
 							</div>
-							<div class="col-lg-4">
-								<!--single-product-->
-								<div class="product-single style-2">
-									<div class="row align-items-center">
-										<div class="col-lg-6 p-0">
-											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/21.jpg" alt="" /></a>
-											</div>
-										</div>
-										<div class="col-lg-6 p-0">
-											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
-											</div>
-											<div class="product-price-rating">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--single-product-->
-								<div class="product-single style-2">
-									<div class="row align-items-center">
-										<div class="col-lg-6 p-0">
-											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/23.jpg" alt="" /></a>
-											</div>
-										</div>
-										<div class="col-lg-6 p-0">
-											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
-											</div>
-											<div class="product-price-rating">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<!--single-product-->
-								<div class="product-single style-2">
-									<div class="row align-items-center">
-										<div class="col-lg-6 p-0">
-											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/9.jpg" alt="" /></a>
-											</div>
-										</div>
-										<div class="col-lg-6 p-0">
-											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
-											</div>
-											<div class="product-price-rating">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--single-product-->
-								<div class="product-single style-2">
-									<div class="row align-items-center">
-										<div class="col-lg-6 p-0">
-											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/12.jpg" alt="" /></a>
-											</div>
-										</div>
-										<div class="col-lg-6 p-0">
-											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
-											</div>
-											<div class="product-price-rating">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<!--single-product-->
-								<div class="product-single style-2">
-									<div class="row align-items-center">
-										<div class="col-lg-6 p-0">
-											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/4.jpg" alt="" /></a>
-											</div>
-										</div>
-										<div class="col-lg-6 p-0">
-											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
-											</div>
-											<div class="product-price-rating">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--single-product-->
-								<div class="product-single style-2">
-									<div class="row align-items-center">
-										<div class="col-lg-6 p-0">
-											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/4.jpg" alt="" /></a>
-											</div>
-										</div>
-										<div class="col-lg-6 p-0">
-											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
-											</div>
-											<div class="product-price-rating">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<!--single-product-->
-								<div class="product-single style-2">
-									<div class="row align-items-center">
-										<div class="col-lg-6 p-0">
-											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/5.jpg" alt="" /></a>
-											</div>
-										</div>
-										<div class="col-lg-6 p-0">
-											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
-											</div>
-											<div class="product-price-rating">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--single-product-->
-								<div class="product-single style-2">
-									<div class="row align-items-center">
-										<div class="col-lg-6 p-0">
-											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/5.jpg" alt="" /></a>
-											</div>
-										</div>
-										<div class="col-lg-6 p-0">
-											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
-											</div>
-											<div class="product-price-rating">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<!--single-product-->
-								<div class="product-single style-2">
-									<div class="row align-items-center">
-										<div class="col-lg-6 p-0">
-											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/6.jpg" alt="" /></a>
-											</div>
-										</div>
-										<div class="col-lg-6 p-0">
-											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
-											</div>
-											<div class="product-price-rating">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--single-product-->
-								<div class="product-single style-2">
-									<div class="row align-items-center">
-										<div class="col-lg-6 p-0">
-											<div class="product-thumb">
-												<a href="#"><img src="/assets/images/products/6.jpg" alt="" /></a>
-											</div>
-										</div>
-										<div class="col-lg-6 p-0">
-											<div class="product-title">
-												<small><a href="#">Electronics</a></small>
-												<h4><a href="#">Vantech VP-153C Camera</a></h4>
-											</div>
-											<div class="product-price-rating">
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-											<div class="product-price-rating">
-												<span>$195.00</span>
-												<del>$229.99</del>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+						{{/each}}
+							
+							
+							
+							
+							
 						</div>
 					</div>
 					<!--recently-viewed-products-end-->
 				</div>
+				</center>
 			</div>
 		</div>
-	</div>
+	</div>  
 	<!--products-area end-->

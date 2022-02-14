@@ -1,24 +1,107 @@
 <div class="container login-container">
   <div class="row" style=" margin-left: 25% !important;">
-    <div class="col-md-6 login-form-1">	 
-	 <h3>Otp for shopping with zar</h3>
-	 <form action="/otpLoginVeryfication" method="POST" id="formdsub">
-                  <p>{{sighnupotpErr}}</p>
-                  <p>{{sighnUpcodeErruser}}</p>
+    <div class="col-md-6 login-form-1">
+      <h3>Otp for shopping with zar</h3>
+      <form action="/otpLoginVeryfication" method="POST" id="formdsub" onsubmit="return validate()">
+        <p>{{sighnupotpErr}}</p>
+        <p>{{sighnUpcodeErruser}}</p>
 
-                        <div class="form-group" id="otpText" >
-                            <input name="otp" type="text" class="form-control" placeholder="Enter Yout OTP" value="" />
-							<div class="form-group" id="hideLogin">
-          <input
-            type="submit"
-            class="btnSubmit"
-            value="LOGIN"
-            style="margin-right: 8px;"
-          />
+        <div class="form-group" id="otpText">
+          <input name="otp" type="text" class="form-control" placeholder="Enter Yout OTP" />
+          <p id="err"></p>
+          <div class="form-group" id="hideLogin">
+            <input id="loginSubmit" type="submit" class="btnSubmit" value="LOGIN" style="margin-right: 8px;" />
 
+            <a style="display: none;" id="resendLoginBtn" onclick="hideLoginResend()">Resnd</a>
+            {{!-- <a class="btnSubmit text-cener" id="resendLoginSubmit" style="display: none;"
+              onclick="return resenLoginOtp()">submit</a> --}}
+            <p id="countdown" style="color: rgb(65, 65, 242);">1:00</p>
+
+          </div>
         </div>
-                        </div>
-              </form>
-			  </div>
-			  </div>
-			  </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  function validate() {
+    let otp = document.myform.otp.value;
+    var valid = true;
+
+    if (otp == null || otp == '') {
+      document.getElementById('err').innerHTML = 'please enter your otp'
+      return false;
+    } else if (isNaN(otp)) {
+      document.getElementById('err').innerHTML = 'String not valid'
+      return false;
+    }else if(otp.length<6){  
+    document.getElementById("err").innerHTML="Password must be greater than 6";  
+      return false;
+
+} else {
+      return true
+    }
+   
+
+  }
+
+  //length validation
+
+
+  //timer resend
+  function startCountDown() {
+    var countDownDate = new Date();
+    countDownDate.setSeconds(countDownDate.getSeconds() + 60);
+    countDownDate = countDownDate.getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+      // Get today's date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the result in the element with id="demo"
+      document.getElementById("countdown").innerHTML = minutes + "m " + seconds + "s ";
+
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "OTP EXPIRED";
+        document.getElementById('resendLoginBtn').style.display = 'block'
+        document.getElementById('loginSubmit').style.display = 'none'
+
+
+        // Resend otp show
+        // Submit btn hide
+      }
+    }, 1000);
+  }
+
+  (function () {
+    startCountDown()
+  })();
+
+
+  //resend button
+  function hideLoginResend() {
+    document.getElementById('resendLoginBtn').style.display = 'none'
+    //document.getElementById('resendLoginSubmit').style.display='block'
+    document.getElementById('loginSubmit').style.display = 'block'
+
+    $.ajax({
+      url: '/resend-login-otp',
+      method: 'get',
+      success: (response) => {
+
+      }
+    })
+  }
+</script>

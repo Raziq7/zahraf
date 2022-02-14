@@ -1,0 +1,49 @@
+<style>
+    .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 320px;
+    margin: auto;
+    text-align: center;
+    font-family: Trebuche MS;
+  }
+  
+  .price {
+    color: black;
+    font-size: 22px;
+  }
+  
+  .card button {
+    border: none;
+    outline: 0;
+    padding: 15px;
+    color: white;
+    
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  
+  .card button:hover {
+    opacity: 1;
+    background-color: black;
+  }
+
+
+</style>
+
+<div class="card">
+  {{#each viewPro}}
+      <img src="/product-image/{{this.viewProductItems._id}}image.png" alt="Denim Jeans" style="width:100%">
+      <h1>{{this.viewProductItems.name}}</h1>
+      <p class="price">₹{{this.viewProductItems.price}}</p>
+      <p>{{this.viewProductItems.description}}</p>
+      <p>{{this.viewProductItems.description1}}</p>
+      <p>{{this.viewProductItems.description2}}</p>
+      {{!-- <p><button>{{this.product.productStatus}}</button></p> --}}
+  {{/each}}
+
+                  </div>
+      {{!-- <center>
+      {{!-- <p>Any Questions? https://join.skype.com/invite/c8dKjCb4o0kT</p> 
+      </center> --}}

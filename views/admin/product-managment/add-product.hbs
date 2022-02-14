@@ -45,27 +45,15 @@
   <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="/images-admin/favicon.png" />
+    <link rel="stylesheet" href="https://unpkg.com/dropzone/dist/dropzone.css" />
+    {{!-- cropper --}}
+  <link href="https://unpkg.com/cropperjs/dist/cropper.css" rel="stylesheet" />
+  <script src="https://unpkg.com/dropzone"></script>
+  <script src="https://unpkg.com/cropperjs"></script> 
 </head>
 <body>
   <div class="container-scroller">
-    <div class="row p-0 m-0 proBanner" id="proBanner">
-      <div class="col-md-12 p-0 m-0">
-        <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-          <div class="ps-lg-1">
-            <div class="d-flex align-items-center justify-content-between">
-              <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-              <a href="https://www.bootstrapdash.com/product/star-admin-pro/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
-            </div>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-            <a href="https://www.bootstrapdash.com/product/star-admin-pro/"><i class="mdi mdi-home me-3 text-white"></i></a>
-            <button id="bannerClose" class="btn border-0 p-0">
-              <i class="mdi mdi-close text-white me-0"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
@@ -75,10 +63,10 @@
           </button>
         </div>
         <div>
-          <a class="navbar-brand brand-logo" href="index.html">
+          <a class="navbar-brand brand-logo" href="/admin">
             <img src="/images-admin/logo.svg" alt="logo" />
           </a>
-          <a class="navbar-brand brand-logo-mini" href="index.html">
+          <a class="navbar-brand brand-logo-mini" href="/admin">
             <img src="/images-admin/logo-mini.svg" alt="logo" />
           </a>
         </div>
@@ -86,12 +74,44 @@
       <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">Raziq</span></h1>
+            <h1 class="welcome-text">Have a nice day, <span class="text-black fw-bold">Admin</span></h1>
             <h3 class="welcome-sub-text">Your performance summary this week</h3>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          
+          <li class="nav-item dropdown d-none d-lg-block">
+            {{!-- <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a> --}}
+            {{!-- <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
+              <a class="dropdown-item py-3" >
+                <p class="mb-0 font-weight-medium float-left">Select category</p>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-item-content flex-grow py-2">
+                  <p class="preview-subject ellipsis font-weight-medium text-dark">Bootstrap Bundle </p>
+                  <p class="fw-light small-text mb-0">This is a Bundle featuring 16 unique dashboards</p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-item-content flex-grow py-2">
+                  <p class="preview-subject ellipsis font-weight-medium text-dark">Angular Bundle</p>
+                  <p class="fw-light small-text mb-0">Everything you’ll ever need for your Angular projects</p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-item-content flex-grow py-2">
+                  <p class="preview-subject ellipsis font-weight-medium text-dark">VUE Bundle</p>
+                  <p class="fw-light small-text mb-0">Bundle of 6 Premium Vue Admin Dashboard</p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-item-content flex-grow py-2">
+                  <p class="preview-subject ellipsis font-weight-medium text-dark">React Bundle</p>
+                  <p class="fw-light small-text mb-0">Bundle of 8 Premium React Admin Dashboard</p>
+                </div>
+              </a>
+            </div> --}}
+          </li>
           <li class="nav-item d-none d-lg-block">
             <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
               <span class="input-group-addon input-group-prepend border-right">
@@ -197,7 +217,7 @@
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+              <a href="/admin/logout" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
             </div>
           </li>
         </ul>
@@ -379,66 +399,190 @@
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/admin">
               <i class="mdi mdi-grid-large menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item nav-category">Details</li>
+          <li class="nav-item nav-category">UI Elements</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-floor-plan"></i>
-              <span class="menu-title">product managment</span>
+              <span class="menu-title">For Product</span>
               <i class="menu-arrow"></i> 
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/admin/product-manage">view products</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/admin/add-poduct">Add product</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">product</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/product-manage">Product Managment</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/add-poduct">Add Product</a></li>
               </ul>
             </div>
           </li>
+          {{!-- for User --}}
+          {{!-- <li class="nav-item nav-category">UI Elements</li> --}}
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-floor-plan"></i>
-              <span class="menu-title">user managment</span>
-              <i class="menu-arrow"></i> 
+              <span class="menu-title">For User</span>
+              <i class="menu-arrow"></i>    
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/admin/view-users">view users</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/view-users">User Managment</a></li>
                 
               </ul>
             </div>
+            
           </li>
-          <li class="nav-item nav-category">Category Details</li>
+          <li class="nav-item nav-category">Forms and Datas</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
-              <span class="menu-title">Form Category</span>
+              <span class="menu-title">Form category</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/admin/category">Category Managment</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/category">category Managment</a></li>
               </ul>
             </div>
           </li>
-          
-          
-          
-         
-          <li class="nav-item nav-category">help</li>
+
+          {{!-banner Managment --}}
+
           <li class="nav-item">
-            <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">
-              <i class="menu-icon mdi mdi-file-document"></i>
-              <span class="menu-title">Documentation</span>
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Banner</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/banner">Banner Managment</a></li>
+              </ul>
+            </div>
+
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/SmallBanner">Small Banner Managment</a></li>
+              </ul>
+            </div>
           </li>
+
+          {{!-- offer Category --}}
+            <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Offers</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/category-offer">Category Offer Managment</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/product-offer">Product Offer Managment</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/coupon-offer">Coupon Offer Managment</a></li>
+              </ul>
+            </div>
+          </li>
+
+          {{!-- order managment --}}
+
+            <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Order</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/order-Managment">Order Managment</a></li>
+              </ul>
+            </div>
+          </li>
+
+  <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Report</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/user-report">User Report Managment</a></li>
+              </ul>
+            </div>
+             <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/stock-report">Stock Report Managment</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/sales-report">Sales Report Managment</a></li>
+              </ul>
+            </div>
+          </li>
+          {{!-- <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="menu-icon mdi mdi-chart-line"></i>
+              <span class="menu-title">Charts</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
+              </ul>
+            </div>
+          </li> --}}
+          {{!-- <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <i class="menu-icon mdi mdi-table"></i>
+              <span class="menu-title">Tables</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a></li>
+              </ul>
+            </div>
+          </li> --}}
+          {{!-- <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+              <i class="menu-icon mdi mdi-layers-outline"></i>
+              <span class="menu-title">Icons</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="icons">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
+              </ul>
+            </div>
+          </li> --}}
+          {{!-- <li class="nav-item nav-category">pages</li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <i class="menu-icon mdi mdi-account-circle-outline"></i>
+              <span class="menu-title">User Pages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/pages/samples/login.html"> Login </a></li>
+              </ul>
+            </div>
+          </li> --}}
+        
         </ul>
       </nav>
       <!-- partial -->
@@ -448,16 +592,20 @@
             <div class="col-sm-12">
               <div class="home-tab">
                 
-                <div class="tab-content tab-content-basic">
+                <div class="tab-content tab-content-basic mt-5">
                   <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview"> 
                     <div class="row">
                         {{!-- center-main-section --}}
                      <div class="container">
-    <form action="/admin/add-product" method="post" enctype="multipart/form-data">
+
+                       
+    <form action="/admin/add-product" method="post" enctype="multipart/form-data" name="formpro" onsubmit="return prosubmit(event)">
     <label for="">Name</label><br>
-    <input class="form-control" name="name" type="text"><br>
+    <input class="form-control" name="name" type="text" style="width: 450px;"><br>
+    <p id="err"></p>
       <label for="">Category</label><br>
-   <input list="encodings"  value="" class="col-sm-6 custom-select custom-select-sm" autocomplete="off" name="category">
+   <input list="encodings"  value="" class="col-sm-6 custom-select custom-select-sm" autocomplete="off" name="category" style="width: 450px;">
+    <p id="catErr"></p>
 <datalist id="encodings">
   {{#each response}}
     <option value="{{this.category}}">{{this.category}}</option>
@@ -465,18 +613,55 @@
 </datalist>
 <br>
 <br>
+ <label for="">Stock</label><br>
+    <input name="stock" class="form-control" type="number" style="width: 450px;"><br>
+    <label for="">Land Cost</label><br>
+    <input name="landcost" class="form-control" type="number" style="width: 450px;"><br>
     <label for="">price</label><br>
-    <input class="form-control" name="price" type="text"><br>
+    <input name="price" class="form-control" type="number" style="width: 450px;"><br>
+    <p id="priErr"></p>
     <label for="">description</label><br>
-    <input class="form-control" name="description" type="text"> <br>
-    <input class="form-control" name="description1" type="text"> <br>
-    <input class="form-control" name="description2" type="text"> <br>
-    <label for="">File</label><br>
-    <input class="form-control" name="image"  type="file"><br>
-    <input class="form-control" name="image1"  type="file"><br>
-    <input class="form-control" name="image2"  type="file"><br>
+    <input class="form-control" name="description" type="text" style="width: 450px;"> <br>
+    <p id="errdes1"></p>
+    <input class="form-control" name="description1" type="text" style="width: 450px;"> <br>
+    <p id="errdes2"></p>
+    <input class="form-control" name="description2" type="text" style="width: 450px;"> <br>
+    <p id="errdes3"></p>
 
-    <button class="btn btn-success" type="submit">Submit</button> 
+    <div class="row">
+     
+      <div class="col-12 col-md-6 col-lg-4">
+         
+    <label for="">File</label><br>
+    <input id="file1" class="form-control" name="image"  type="file" onchange="return proImageView1(event)"><br>
+    <img width="150" height="auto" alt="" src="/images/Screenshot from 2022-01-15 12-06-19.png" id="viewProImage1" style="display: none;" >
+
+    <p id="imgerr"></p>
+    <input id="file2" class="form-control" name="image1"  type="file" onchange="return proImageView2(event)"><br>
+    <img width="150" height="auto" src="" id="viewProImage2" style="display: none;">
+
+    <p id="imgerr1"></p>
+    <input id="file3" class="form-control" name="image2"  type="file" onchange="return proImageView3(event)"><br>
+    <img width="150" height="auto" alt="" id="viewProImage3" style="display: none;">
+
+    <p id="imgerr2"></p>
+    </div>
+     <div class="col-12 col-md-6 col-lg-4">
+       <div style="display: flex; justify-content: center; margin-top: 30px;">
+        <div id="image-box1" style="width: 400px; height: 300px; display: none;">
+        </div>
+        <div>
+
+          <button class="btn btn-primary" type="button" style="display: none; margin-left: 20px;"
+            id="crop-btn1">Crop</button>
+        </div>
+
+      </div>
+      </div>
+    </div>
+
+
+    <button id="confirm-btn1" class="btn btn-success" type="submit">Submit</button> 
 </form>
 </div> 
                         {{!-- center-main-section -end --}}
@@ -528,20 +713,257 @@
   <script src="/js/dashboard.js"></script>
   <script src="/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
-</body>
 
+
+<script>
+  function prosubmit(){
+    var name=document.formpro.name;
+    var category=document.formpro.category;
+    var price=document.formpro.price;
+    var description=document.formpro.description;
+    var description1=document.formpro.description1;
+    var description2=document.formpro.description2;
+    var image=document.formpro.image;
+    var image1=document.formpro.image1;
+    var image2=document.formpro.image2;
+
+
+
+
+   if (name.value.length <= 0) {    
+      document.getElementById('err').innerHTML='Name is required'
+                 name.focus();    
+                return false;    
+            }    
+            else if (category.value.length <= 0) {    
+            document.getElementById('catErr').innerHTML='category is required'
+                category.focus();    
+                return false;    
+            }    
+            else if (price.value.length <= 0) {    
+               document.getElementById('priErr').innerHTML='Price is required'
+                price.focus();    
+                return false;    
+            }    
+            else if (description.value.length <= 0) { 
+              document.getElementById('errdes1').innerHTML='description is required'       
+                description.focus();    
+                return false;    
+            }    
+            else if (description1.value.length <= 0) {  
+              document.getElementById('errdes2').innerHTML='description is required'  
+                description1.focus();    
+                return false;    
+            }    
+            else if (description2.value.length <= 0) {    
+              document.getElementById('errdes3').innerHTML='description is required'
+                description2.focus();    
+                return false;    
+            }else if (image.value.length <= 0) {    
+              document.getElementById('imgerr').innerHTML='image is required'
+                image.focus();    
+                return false;    
+            }else if (image1.value.length <= 0) {    
+              document.getElementById('imgerr1').innerHTML='image is required'
+                image1.focus();    
+                return false;    
+            }else if (image2.value.length <= 0) {    
+              document.getElementById('imgerr2').innerHTML='image is required'
+                image2.focus();    
+                return false;    
+            }else{  
+
+            return true;    
+            }
+            }
+
+      //function proImageView1(event){
+        //document.getElementById('viewProImage1').src=URL.createObjectURL(event.target.files[0])
+        //document.getElementById('viewProImage1').style.display='block'
+        
+      //}
+      // function proImageView2(event){
+        //document.getElementById('viewProImage2').src=URL.createObjectURL(event.target.files[0])
+        //document.getElementById('viewProImage2').style.display='block'
+        
+      //}
+       //function proImageView3(event){
+        //document.getElementById('viewProImage3').src=URL.createObjectURL(event.target.files[0])
+        //document.getElementById('viewProImage3').style.display='block'
+        
+      //}
+
+//cropper js
+
+ function proImageView1() {
+console.log('hello')
+const imagebox = document.getElementById('image-box1')
+const crop_btn = document.getElementById('crop-btn1')
+var fileInput = document.getElementById('file1');
+
+var filePath = fileInput.value;
+var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+if (!allowedExtensions.exec(filePath)) {
+  fileInput.value = '';
+  swal("Ther is a problem!", "...File Must be Image!");
+  return false;
+} else {
+  //Image preview
+  const img_data = fileInput.files[0]
+  const url = URL.createObjectURL(img_data)
+  imagebox.innerHTML = `<img src="${url}" id="image" style="width:100%">`
+  const image = document.getElementById('image')
+  document.getElementById('image-box1').style.display = 'block'
+  document.getElementById('crop-btn1').style.display = 'block'
+  document.getElementById('confirm-btn1').style.display = 'none'
+
+  const cropper = new Cropper(image, {
+    autoCropArea: 1,
+    viewMode: 1,
+    scalable: false,
+    zoomable: false,
+    movable: false,
+    aspectRatio: 28 / 23,
+    //preview: '.preview',
+    minCropBoxWidth: 180,
+    minCropBoxHeight: 240,
+  })
+  crop_btn.addEventListener('click', () => {
+    cropper.getCroppedCanvas().toBlob((blob) => {
+      let fileInputElement = document.getElementById('file1');
+      let file = new File([blob], img_data.name, { type: "image/*", lastModified: new Date().getTime() });
+      let container = new DataTransfer();
+
+      container.items.add(file);
+      const img = container.files[0]
+      var url = URL.createObjectURL(img)
+      fileInputElement.files = container.files;
+      document.getElementById('viewProImage1').src = url
+      document.getElementById('viewProImage1').style.display='block'
+      document.getElementById('image-box1').style.display = 'none'
+      document.getElementById('crop-btn1').style.display = 'none'
+      document.getElementById('confirm-btn1').style.display = 'block'
+    }, 'image/webp', 0.5);
+  });
+}
+}
+
+//cropper 2nd file
+ function proImageView2() {
+console.log('hello')
+const imagebox = document.getElementById('image-box1')
+const crop_btn = document.getElementById('crop-btn1')
+var fileInput = document.getElementById('file2');
+
+var filePath = fileInput.value;
+var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+if (!allowedExtensions.exec(filePath)) {
+  fileInput.value = '';
+  swal("Ther is a problem!", "...File Must be Image!");
+  return false;
+} else {
+  //Image preview
+  const img_data = fileInput.files[0]
+  const url = URL.createObjectURL(img_data)
+  imagebox.innerHTML = `<img src="${url}" id="image" style="width:100%">`
+  const image = document.getElementById('image')
+  document.getElementById('image-box1').style.display = 'block'
+  document.getElementById('crop-btn1').style.display = 'block'
+  document.getElementById('confirm-btn1').style.display = 'none'
+
+  const cropper = new Cropper(image, {
+    autoCropArea: 1,
+    viewMode: 1,
+    scalable: false,
+    zoomable: false,
+    movable: false,
+    aspectRatio: 30 / 19,
+    //preview: '.preview',
+    minCropBoxWidth: 180,
+    minCropBoxHeight: 240,
+  })
+  crop_btn.addEventListener('click', () => {
+    cropper.getCroppedCanvas().toBlob((blob) => {
+      let fileInputElement = document.getElementById('file2');
+      let file = new File([blob], img_data.name, { type: "image/*", lastModified: new Date().getTime() });
+      let container = new DataTransfer();
+
+      container.items.add(file);
+      const img = container.files[0]
+      var url = URL.createObjectURL(img)
+      fileInputElement.files = container.files;
+      document.getElementById('viewProImage2').src = url
+      document.getElementById('viewProImage2').style.display='block'
+      document.getElementById('image-box1').style.display = 'none'
+      document.getElementById('crop-btn1').style.display = 'none'
+      document.getElementById('confirm-btn1').style.display = 'block'
+    }, 'image/webp', 0.5);
+  });
+}
+}
+
+//cropper 2nd file
+ function proImageView3() {
+console.log('hello')
+const imagebox = document.getElementById('image-box1')
+const crop_btn = document.getElementById('crop-btn1')
+var fileInput = document.getElementById('file3');
+
+var filePath = fileInput.value;
+var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+if (!allowedExtensions.exec(filePath)) {
+  fileInput.value = '';
+  swal("Ther is a problem!", "...File Must be Image!");
+  return false;
+} else {
+  //Image preview
+  const img_data = fileInput.files[0]
+  const url = URL.createObjectURL(img_data)
+  imagebox.innerHTML = `<img src="${url}" id="image" style="width:100%">`
+  const image = document.getElementById('image')
+  document.getElementById('image-box1').style.display = 'block'
+  document.getElementById('crop-btn1').style.display = 'block'
+  document.getElementById('confirm-btn1').style.display = 'none'
+
+  const cropper = new Cropper(image, {
+    autoCropArea: 1,
+    viewMode: 1,
+    scalable: false,
+    zoomable: false,
+    movable: false,
+    aspectRatio: 30 / 19,
+    //preview: '.preview',
+    minCropBoxWidth: 180,
+    minCropBoxHeight: 240,
+  })
+  crop_btn.addEventListener('click', () => {
+    cropper.getCroppedCanvas().toBlob((blob) => {
+      let fileInputElement = document.getElementById('file3');
+      let file = new File([blob], img_data.name, { type: "image/*", lastModified: new Date().getTime() });
+      let container = new DataTransfer();
+
+      container.items.add(file);
+      const img = container.files[0]
+      var url = URL.createObjectURL(img)
+      fileInputElement.files = container.files;
+      document.getElementById('viewProImage3').src = url
+      document.getElementById('viewProImage3').style.display='block'
+      document.getElementById('image-box1').style.display = 'none'
+      document.getElementById('crop-btn1').style.display = 'none'
+      document.getElementById('confirm-btn1').style.display = 'block'
+    }, 'image/webp', 0.5);
+  });
+}
+}
+</script>
+
+<script src=" https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.js"></script>
+          <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+          </body>
 </html>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+  

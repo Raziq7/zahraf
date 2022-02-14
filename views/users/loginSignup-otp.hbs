@@ -14,9 +14,12 @@
             type="submit"
             class="btnSubmit"
             value="LOGIN"
+            id="submit"
             style="margin-right: 8px;"
           />
-
+          <a href="/resend-signup-otp" style="display: none;" id="resendBtn" onclick="hiderResend()">Resnd</a>
+         
+      <p id="countdown" style="color: rgb(65, 65, 242);">1:00</p>
         </div>
                         </div>
               </form>
@@ -24,14 +27,70 @@
 			  </div>
 			  </div>
 <script>
+  //validation-form
   function validate(){
     let otp=document.myform.otp.value;
     if(otp==null || otp==''){
       document.getElementById('err').innerHTML='please enter your otp'
+      return false;
     }else if(isNaN(otp)){
       document.getElementById('err').innerHTML='String not valid'
+      return false;
+    }else if(otp.length<6){  
+    document.getElementById("err").innerHTML="Password must be greater than 6";  
+      return false;
+
+}else{
+      return true
     }
 
   }
+
+  //timer resend
+  function startCountDown(){
+            var countDownDate = new Date();
+            countDownDate.setSeconds( countDownDate.getSeconds() + 60 );
+            countDownDate = countDownDate.getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("countdown").innerHTML = minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = "OTP EXPIRED";
+  document.getElementById('resendBtn').style.display='block'
+  document.getElementById('submit').style.display='none'
+
+
+    // Resend otp show
+    // Submit btn hide
+  }
+}, 1000);
+        }
+
+        (function() {
+            startCountDown()
+})();
+
+
+//resend button
+function hiderResend(){
+  document.getElementById('resendBtn').style.display='none'
+  document.getElementById('submit').style.display='block'
+}
 </script>
         

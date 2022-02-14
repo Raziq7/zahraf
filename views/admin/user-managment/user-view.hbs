@@ -25,27 +25,21 @@
   <link rel="stylesheet" href="/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="/images-admin/favicon.png" />
+  {{!-- pagination link --}}
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+		<script src="//code.jquery.com/jquery.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>    
+        <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+
+    <style>
+    .li-tag {
+  display: inline-block;
+}
+  </style>
 </head>
 <body>
   <div class="container-scroller">
-    <div class="row p-0 m-0 proBanner" id="proBanner">
-      <div class="col-md-12 p-0 m-0">
-        <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-          <div class="ps-lg-1">
-            <div class="d-flex align-items-center justify-content-between">
-              <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-              <a href="https://www.bootstrapdash.com/product/star-admin-pro/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
-            </div>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-            <a href="https://www.bootstrapdash.com/product/star-admin-pro/"><i class="mdi mdi-home me-3 text-white"></i></a>
-            <button id="bannerClose" class="btn border-0 p-0">
-              <i class="mdi mdi-close text-white me-0"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
@@ -55,23 +49,55 @@
           </button>
         </div>
         <div>
-          <a class="navbar-brand brand-logo" href="index.html">
+          <a class="navbar-brand brand-logo" href="/admin">
             <img src="/images-admin/logo.svg" alt="logo" />
           </a>
-          <a class="navbar-brand brand-logo-mini" href="index.html">
+          <a class="navbar-brand brand-logo-mini" href="/admin">
             <img src="/images-admin/logo-mini.svg" alt="logo" />
           </a>
         </div>
       </div>
-      <div class="navbar-menu-wrapper d-flex align-items-top"> 
+     <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">Raziq</span></h1>
-            <h3 class="welcome-sub-text">Your performance summary this week </h3>
+            <h1 class="welcome-text">Have a nice day, <span class="text-black fw-bold">Admin</span></h1>
+            <h3 class="welcome-sub-text">Your performance summary this week</h3>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          
+          <li class="nav-item dropdown d-none d-lg-block">
+            {{!-- <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a> --}}
+            {{!-- <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
+              <a class="dropdown-item py-3" >
+                <p class="mb-0 font-weight-medium float-left">Select category</p>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item preview-item">
+                <div class="preview-item-content flex-grow py-2">
+                  <p class="preview-subject ellipsis font-weight-medium text-dark">Bootstrap Bundle </p>
+                  <p class="fw-light small-text mb-0">This is a Bundle featuring 16 unique dashboards</p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-item-content flex-grow py-2">
+                  <p class="preview-subject ellipsis font-weight-medium text-dark">Angular Bundle</p>
+                  <p class="fw-light small-text mb-0">Everything you’ll ever need for your Angular projects</p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-item-content flex-grow py-2">
+                  <p class="preview-subject ellipsis font-weight-medium text-dark">VUE Bundle</p>
+                  <p class="fw-light small-text mb-0">Bundle of 6 Premium Vue Admin Dashboard</p>
+                </div>
+              </a>
+              <a class="dropdown-item preview-item">
+                <div class="preview-item-content flex-grow py-2">
+                  <p class="preview-subject ellipsis font-weight-medium text-dark">React Bundle</p>
+                  <p class="fw-light small-text mb-0">Bundle of 8 Premium React Admin Dashboard</p>
+                </div>
+              </a>
+            </div> --}}
+          </li>
           <li class="nav-item d-none d-lg-block">
             <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
               <span class="input-group-addon input-group-prepend border-right">
@@ -83,7 +109,7 @@
           <li class="nav-item">
             <form class="search-form" action="#">
               <i class="icon-search"></i>
-              <input type="search" class="form-control" placeholder="Search Here" title="Search here">
+              <input type="search" class="form-control" placeholder="Search Here" title="Search here" id="search">
             </form>
           </li>
           <li class="nav-item dropdown">
@@ -170,14 +196,14 @@
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
                 <img class="img-md rounded-circle" src="/images-admin/faces/face8.jpg" alt="Profile image">
-                <p class="mb-1 mt-3 font-weight-semibold">Allen Moreno</p>
-                <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
+                <p class="mb-1 mt-3 font-weight-semibold">Raziq</p>
+                <p class="fw-light text-muted mb-0">raziqsur@gmail.com</p>
               </div>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>
               <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
-              <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+              <a href="/admin/logout" class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
             </div>
           </li>
         </ul>
@@ -353,21 +379,21 @@
                 <small class="text-muted my-auto">47 min</small>
               </li>
             </ul>
-          </div>
+          </div>  
           <!-- chat tab ends -->
         </div>
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/admin">
               <i class="mdi mdi-grid-large menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          <li class="nav-item nav-category">Product Managment</li>
+          <li class="nav-item nav-category">UI Elements</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-floor-plan"></i>
@@ -378,28 +404,30 @@
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/admin/product-manage">Product Managment</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/add-poduct">Add Product</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">product</a></li>
               </ul>
             </div>
-            <li class="nav-item">
+          </li>
+          {{!-- for User --}}
+          {{!-- <li class="nav-item nav-category">UI Elements</li> --}}
+          <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-floor-plan"></i>
-              <span class="menu-title">user managment</span>
-              <i class="menu-arrow"></i> 
+              <span class="menu-title">For User</span>
+              <i class="menu-arrow"></i>    
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/admin/view-users">view users</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/admin/view-users">User Managment</a></li>
                 
               </ul>
             </div>
+            
           </li>
-          </li>
-          <li class="nav-item nav-category">Catagory</li>
+          <li class="nav-item nav-category">Forms and Datas</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
-              <span class="menu-title">For Category</span>
+              <span class="menu-title">Form category</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
@@ -408,15 +436,139 @@
               </ul>
             </div>
           </li>
-                
-        
-          <li class="nav-item nav-category">help</li>
+
+          {{!-banner Managment --}}
+
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="menu-icon mdi mdi-file-document"></i>
-              <span class="menu-title">Documentation</span>
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Banner</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/banner">Banner Managment</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/SmallBanner">Small Banner Managment</a></li>
+              </ul>
+            </div>
           </li>
+
+          {{!-- offer Category --}}
+            <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Offers</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/category-offer">Category Offer Managment</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/product-offer">Product Offer Managment</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/coupon-offer">Coupon Offer Managment</a></li>
+              </ul>
+            </div>
+          </li>
+
+          {{!-- order managment --}}
+
+            <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Order</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/order-Managment">Order Managment</a></li>
+              </ul>
+            </div>
+          </li>
+
+  <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Report</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/user-report">User Report Managment</a></li>
+              </ul>
+            </div>
+             <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/stock-report">Stock Report Managment</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/sales-report">Sales Report Managment</a></li>
+              </ul>
+            </div>
+          </li>
+
+          {{!-- <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+              <i class="menu-icon mdi mdi-chart-line"></i>
+              <span class="menu-title">Charts</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="charts">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
+              </ul>
+            </div>
+          </li> --}}
+          {{!-- <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+              <i class="menu-icon mdi mdi-table"></i>
+              <span class="menu-title">Tables</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="tables">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a></li>
+              </ul>
+            </div>
+          </li> --}}
+          {{!-- <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+              <i class="menu-icon mdi mdi-layers-outline"></i>
+              <span class="menu-title">Icons</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="icons">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
+              </ul>
+            </div>
+          </li> --}}
+          {{!-- <li class="nav-item nav-category">pages</li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <i class="menu-icon mdi mdi-account-circle-outline"></i>
+              <span class="menu-title">User Pages</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/pages/samples/login.html"> Login </a></li>
+              </ul>
+            </div>
+          </li> --}}
+        
         </ul>
       </nav>
       <!-- partial -->
@@ -434,7 +586,13 @@
                         {{!-- center-main-section --}}
 
 
-                    <table class="table mt-5 table table-hover table-bordered">
+                    <table class="table mt-5 table table-hover table-bordered" data-toggle="table" 
+       data-classes="table table-hover table-condensed"
+       data-row-style="rowStyle"
+       data-striped="true"
+       data-sort-name="Quality"
+       data-sort-order="desc"
+       data-pagination="true">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -448,12 +606,12 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody id="table">
        {{#each showUser}}
-    <tr>
+    <tr id="tr-id-2" class="tr-class-2">
      
        
-      <th scope="row">{{@index}}</th>
+      <td class="index" scope="row">{{@index}}</td>
       <td>{{this.name}}</td>
       <td>{{this.email}}</td>
       <td>{{this.phone}}</td>
@@ -530,19 +688,50 @@
   <script src="/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
 </body>
-
+ 
 </html>
+ <script>
+  
+  var td=document.querySelectorAll(".index")
+    console.log("td.length******",td.length)
+for(var i=0;i<td.length;i++){
+ td[i].innerHTML=i+1
+}
+
+ //Pagination
+	function queryParams() {
+    return {
+        type: 'owner',
+        sort: 'updated',
+        direction: 'desc',
+        per_page: 100,
+        page: 1
+    };
+}
+function rowStyle(row, index) {
+    var classes = ['active', 'success', 'info', 'warning', 'danger'];
+    
+    if (index % 2 === 0 && index / 2 < classes.length) {
+        return {
+            classes: classes[index / 2]
+        };
+    }
+    return {};
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
+    //index
+    var td=document.querySelectorAll(".index")
+    console.log("td.length******",td.length)
+for(var i=0;i<td.length;i++){
+ td[i].innerHTML=i+1
+}
+//search
+$("#search").on("keyup", function() {
+  var value = $(this).val().toLowerCase();
+  $("#table tr").filter(function() {
+    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+  });
+});
+</script>
 

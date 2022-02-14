@@ -1071,16 +1071,14 @@ h1, h2, h3, h4, h5, h6 {
 	height:515px;
 }
 .slider-single.bg-5 {
-	background-image:url(assets/images/sliders/5.jpg);
-	height:630px;
+	height:520px;
 }
 .slider-single.bg-6 {
 	background-image:url(assets/images/sliders/1.png);
 	height:700px;
 }
 .slider-single.bg-7 {
-	background-image:url(assets/images/sliders/6.jpg);
-	height:630px;
+	height: 520px;;
 }
 /*----------------------------------------*/
 /*  5.2 Banner

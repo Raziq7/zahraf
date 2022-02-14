@@ -79,24 +79,7 @@
 </style>
 <body>
   <div class="container-scroller">
-    <div class="row p-0 m-0 proBanner" id="proBanner">
-      <div class="col-md-12 p-0 m-0">
-        <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-          <div class="ps-lg-1">
-            <div class="d-flex align-items-center justify-content-between">
-              <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-              <a href="https://www.bootstrapdash.com/product/star-admin-pro/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
-            </div>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-            <a href="https://www.bootstrapdash.com/product/star-admin-pro/"><i class="mdi mdi-home me-3 text-white"></i></a>
-            <button id="bannerClose" class="btn border-0 p-0">
-              <i class="mdi mdi-close text-white me-0"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
@@ -106,10 +89,10 @@
           </button>
         </div>
         <div>
-          <a class="navbar-brand brand-logo" href="index.html">
+          <a class="navbar-brand brand-logo" href="/admin">
             <img src="/images-admin/logo.svg" alt="logo" />
           </a>
-          <a class="navbar-brand brand-logo-mini" href="index.html">
+          <a class="navbar-brand brand-logo-mini" href="/admin">
             <img src="/images-admin/logo-mini.svg" alt="logo" />
           </a>
         </div>
@@ -117,14 +100,14 @@
       <div class="navbar-menu-wrapper d-flex align-items-top"> 
         <ul class="navbar-nav">
           <li class="nav-item font-weight-semibold d-none d-lg-block ms-0">
-            <h1 class="welcome-text">Good Morning, <span class="text-black fw-bold">Admin</span></h1>
-            <h3 class="welcome-sub-text">Your performance summary this week </h3>
+            <h1 class="welcome-text">Have a nice day, <span class="text-black fw-bold">Admin</span></h1>
+            <h3 class="welcome-sub-text">Your performance summary this week</h3>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown d-none d-lg-block">
-            <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
+            {{!-- <a class="nav-link dropdown-bordered dropdown-toggle dropdown-toggle-split" id="messageDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false"> Select Category </a> --}}
+            {{!-- <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list pb-0" aria-labelledby="messageDropdown">
               <a class="dropdown-item py-3" >
                 <p class="mb-0 font-weight-medium float-left">Select category</p>
               </a>
@@ -153,7 +136,7 @@
                   <p class="fw-light small-text mb-0">Bundle of 8 Premium React Admin Dashboard</p>
                 </div>
               </a>
-            </div>
+            </div> --}}
           </li>
           <li class="nav-item d-none d-lg-block">
             <div id="datepicker-popup" class="input-group date datepicker navbar-date-picker">
@@ -442,10 +425,10 @@
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="/admin">
               <i class="mdi mdi-grid-large menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -454,30 +437,127 @@
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-floor-plan"></i>
-              <span class="menu-title">Project</span>
+              <span class="menu-title">For Product</span>
               <i class="menu-arrow"></i> 
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="/admin/product-manage">Product Managment</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/admin/add-poduct">Add Product</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">product</a></li>
               </ul>
             </div>
           </li>
-          {{!-- <li class="nav-item nav-category">Forms and Datas</li>
+          {{!-- for User --}}
+          {{!-- <li class="nav-item nav-category">UI Elements</li> --}}
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-floor-plan"></i>
+              <span class="menu-title">For User</span>
+              <i class="menu-arrow"></i>    
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="/admin/view-users">User Managment</a></li>
+                
+              </ul>
+            </div>
+            
+          </li>
+          <li class="nav-item nav-category">Forms and Datas</li>
           <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="menu-icon mdi mdi-card-text-outline"></i>
-              <span class="menu-title">Form elements</span>
+              <span class="menu-title">Form category</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="form-elements">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="/pages/forms/basic_elements.html">Basic Elements</a></li>
+                <li class="nav-item"><a class="nav-link" href="/admin/category">category Managment</a></li>
               </ul>
             </div>
-          </li> --}}
+          </li>
+
+          {{!-banner Managment --}}
+
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Banner</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/banner">Banner Managment</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/SmallBanner">Small Banner Managment</a></li>
+              </ul>
+            </div>
+          </li>
+
+          {{!-- offer Category --}}
+            <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Offers</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/category-offer">Category Offer Managment</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/product-offer">Product Offer Managment</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/coupon-offer">Coupon Offer Managment</a></li>
+              </ul>
+            </div>
+          </li>
+
+          {{!-- order managment --}}
+
+            <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Order</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/order-Managment">Order Managment</a></li>
+              </ul>
+            </div>
+          </li>
+
+  <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+              <i class="menu-icon mdi mdi-card-text-outline"></i>
+              <span class="menu-title">For Report</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/user-report">User Report Managment</a></li>
+              </ul>
+            </div>
+             <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/stock-report">Stock Report Managment</a></li>
+              </ul>
+            </div>
+            <div class="collapse" id="form-elements">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="/admin/sales-report">Sales Report Managment</a></li>
+              </ul>
+            </div>
+          </li>
           {{!-- <li class="nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="menu-icon mdi mdi-chart-line"></i>
@@ -526,14 +606,8 @@
                 <li class="nav-item"> <a class="nav-link" href="/pages/samples/login.html"> Login </a></li>
               </ul>
             </div>
-          </li>
-          <li class="nav-item nav-category">help</li> --}}
-          {{!-- <li class="nav-item">
-            <a class="nav-link" href="http://bootstrapdash.com/demo/star-admin2-free/docs/documentation.html">
-              <i class="menu-icon mdi mdi-file-document"></i>
-              <span class="menu-title">Documentation</span>
-            </a>
           </li> --}}
+        
         </ul>
       </nav>
       <!-- partial -->
@@ -590,7 +664,7 @@
     >
       <h3>Add category</h3>
       <div class="d-flex align-items-center mb-3">
-          <form action="/admin/admin-addCategory" method="POST">
+          <form action="/admin/admin-addCategory" method="POST" name="formcate" onsubmit="return mysubmit()">
         <div class="form-group mr-3 mb-0">
           <input
             name="category"
@@ -598,6 +672,7 @@
             class="form-control"
             placeholder="Enter a category here"
           />
+          <p class="text-danger" id="caterr"></p>
         </div>
         <button type="submit" class="btn btn-primary mr-3">
           Save
@@ -622,14 +697,14 @@
               ng-repeat="task in tasks"
               class=""
             >
-              <td id="index">{{@index}}</td>
+              <td class="index">{{@index}}</td>
               <td >
                {{this.category}}
               </td>
               
               <td>
                 <button class="btn btn-danger" ng-click="delete($index)">
-                 <a href="/admin/category-delete/?id={{this._id}}">Delete</a> 
+                 <a onclick="confirmDel('{{this._id}}')">Delete</a> 
                 </button>
                 {{!-- <button class="btn btn-success" ng-click="finished($index)">
                   Finished
@@ -664,7 +739,7 @@
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash.</span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Premium <a href="/" target="_blank">admin template</a> from zahraf.</span>
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © 2021. All rights reserved.</span>
           </div>
         </footer>
@@ -697,28 +772,79 @@
   <script src="/js/dashboard.js"></script>
   <script src="/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
+  {{!-- sweetalert --}}
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 <script>
-  var x = document.getElementById("index");
-  var txt = "";
-  var i;
-  for (i = 1; i < x.length;i++) {
-    txt = txt + "The index of Row "+(i+1)+" is: "+x[i].rowIndex+"<br>";
+  //for index num
+  var td=document.querySelectorAll(".index")
+    for(var i=0;i<td.length;i++){
+   td[i].innerHTML=i+1
+}
+
+//for validation
+  function mysubmit(){
+    let catename=document.formcate.category.value;
+    if(catename==null || catename==''){
+      document.getElementById('caterr').innerHTML='Name require'
+       return false;
+    }else{
+      return true
+    }
   }
-  document.getElementById("demo").innerHTML = txt;
+
+  function confirmDel(categoryId) {
+
+  const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, cancel!',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+ $.ajax({
+          url: '/admin/category-delete',
+          method: "post",
+          data: {categoryId:categoryId },
+          success: (response) => {
+            if (response) {    
+    swalWithBootstrapButtons.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+    location.reload()
+            }
+          }
+        })
+
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      'Cancelled',
+      'Your imaginary file is safe :)',
+      'error'
+    )
+  }
+})
+ }
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

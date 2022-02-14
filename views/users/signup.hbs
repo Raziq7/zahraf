@@ -77,10 +77,9 @@ color: red;
     }
       
           </style>  
-       </head>  
-       <body>  
+     
     <div class="container register-form">
-        <form action="/submitotp" method="POST" id="formdsub">
+        <form action="/submitotp" method="POST" id="formdsub" name="mysignupform" onsubmit="return signupSubmit()">
                 <div class="form">  
                     <div class="note">  
                         <h1>zaraf  </h1>  
@@ -98,40 +97,90 @@ color: red;
                                 <div class="form-group">  
                                     <input type="text" name="name" class="form-control" placeholder="Your Name *" value=""/>  
                                 </div>  
+                                <div id="err"></div>
                                 <div class="form-group">  
                                     <input type="text" name="phone" class="form-control" placeholder="Phone Number *" value=""/>  
-                                </div>  
+                                </div>
+                                <div id="errphone"></div>
+
                             </div>              
                             <div class="col-md-6">  
                                 <div class="form-group">  
                                     <input type="password" name="password" class="form-control" placeholder="Your Password *" value=""/>  
                                 </div>  
+                                <div id="errpassword"></div>
+
                                 <div class="form-group">  
                                     <input type="password" name="confirm" class="form-control" placeholder="Confirm Password *" value=""/>  
                                 </div>  
+                                <div id="errcnfpass"></div>
+
                             </div>  
                         </div>  
         <div class="row align-items-center mt-4">  
                 <div class="col">  
                   <input type="email" name="email" class="form-control" placeholder=" Enter Email Address">  
                 </div>  
+                <div id="erremail"></div>
+
               </div> <div class="row align-items-center mt-4">  
                 <div class="col">  
                   <input type="text" name="address" class="form-control" placeholder=" Address">  
                 </div>  
+                  <div id="erraddress"></div>
+
               </div>  
         <div class="row justify-content-start mt-4">  
                 <div class="col">  
-                  <div class="form-check">  
-                    <label class="form-check-label">  
-                      <input type="checkbox" class="form-check-input">  
-                      I hereby agree to the <a href="/"> Terms and Conditions. </a>  
-                    </label>  
-                  </div>  
+                   
                         <button type="submit" class="btnSubmit"> Submit </button>  
                     </div>  
                 </div>  
                 </form>
             </div>  
-    </body>  
-    </html>  
+  
+    <script>    
+        function signupSubmit() {    
+      var name=document.mysignupform.name;
+      var phone=document.mysignupform.phone;
+      var password=document.mysignupform.password;
+      var phone=document.mysignupform.phone;
+      var confirm=document.mysignupform.confirm;
+      var email=document.mysignupform.email;
+      var address=document.mysignupform.address;   
+    
+            if (name.value.length <= 0) {    
+                document.getElementById('err').innerHTML='Name id require'
+                name.focus();    
+                return false;    
+            }    
+            else if (phone.value.length <= 0) {    
+            document.getElementById('errphone').innerHTML='Number is required'
+                phone.focus();    
+                return false;    
+            }    
+            else if (address.value.length <= 0) {    
+              document.getElementById('erraddress').innerHTML='Address is required'
+                address.focus();    
+                return false;    
+            }    
+            else if (password.value.length <= 0) { 
+              document.getElementById('errcnfpass').innerHTML='Password is required'       
+                password.focus();    
+                return false;    
+            }    
+            else if (email.value.length <= 0) {  
+              document.getElementById('erremail').innerHTML='Email Id is required'  
+                email.focus();    
+                return false;    
+            }    
+            else if (confirm.value.length <= 0) {    
+              document.getElementById('errcnfpass').innerHTML='confirm password is required'
+                confirm.focus();    
+                return false;    
+            }else{
+
+            return true;    
+            }   
+        }    
+    </script>    

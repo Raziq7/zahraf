@@ -3,7 +3,7 @@
     <div class="col-md-6 login-form-1">
 	 <h3>number for shopping with zar</h3>
 
- <form action="/userVeryfication" method="POST" id="formdsub">
+ <form action="/userVeryfication" method="POST" id="formdsub" name="myformOtp" onsubmit="return mysubmit()">
         {{#if err}}
           <p>Invalid Password or Email</p>
         {{/if}}
@@ -19,6 +19,7 @@
             placeholder="Your number *"
             value=""
           />
+          <P class="text-danger" id="numerr"></P>
         </div>
          <div class="form-group" id="hideLogin">
           <input
@@ -27,9 +28,21 @@
             value="LOGIN"
             style="margin-right: 8px;"
           />
+         
 
         </div>
         </form>
         </div>
         </div>
         </div>
+        <script>
+  function mysubmit(){
+    let phone=document.myformOtp.phone.value;
+    if(phone==null || phone==''){
+      document.getElementById('numerr').innerHTML='Number require'
+       return false;
+    }else{
+      return true
+    }
+  }
+</script>
