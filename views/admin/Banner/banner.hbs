@@ -678,7 +678,7 @@
                               <tr ng-repeat="task in tasks" class="">
                                 <td class="index">{{@index}}</td>
                                 <td>
-                                  <img src="/banner-image/{{this._id}}banner.png" alt="">
+                                  <img src="https://zahraf.s3.amazonaws.com/{{this._id}}banner.png" alt="">
                                 </td>
                                 <td>{{this.description}}</td>
 
@@ -695,52 +695,6 @@
                             {{/each}}
                           </table>
                         </div>
-                      <div class="continer mt-5">
-                        <div>
-                          <h3 class="text-center">Small Banner</h3>
-                        </div>
-                        <div class="row">
-                        <form action="/admin/small-banner" method="post" enctype="multipart/form-data" name="formBanner"
-                          onsubmit="return bannerValidate2()"> 
-                          <div class="row">
-                            <div class="col-12 col-md-6 col-lg-4">
-                            
-                              <input class="form-control" name="banner" id="bannerInput1" type="file"
-                                onchange="return BannerCropper1()"><br>
-                              <img width="150" height="auto" alt="" src="/images/Screenshot from 2022-01-15 12-06-19.png"
-                                id="Bannerpreview1" style="display: none;">
-
-                              <p style="color: red;" id="err"></p>
-                              <label>Banner Content</label>
-                              <input class="form-control" name="description" id="des1" type="text"> <br>
-                              <p style="color: red;" id="err1"></p>
-
-                              <button class="btn btn-success" id="confirm-btn1" type="submit">Submit</button>
-                            </div>
-
-                            <div class="col-12 col-md-6 col-lg-4">
-                              <div style="display: flex; justify-content: center; margin-top: 30px;">
-                                <div id="image-box2" style="width: 600px; height: 300px; display: none;">
-                                </div>
-                                <div>
-
-                                  <button class="btn btn-primary" type="button"
-                                    style="display: none; margin-left: 20px;" id="crop-btn2">Crop</button>
-                                </div>
-
-                              </div>
-                            </div>
-
-                          
-
-                          </div>
-
-                        </form>
-                        </div>
-                        {{!-- center-main-section -end --}}
-
-
-                      </div>
 
 
                     </div>
@@ -883,7 +837,7 @@ var td=document.querySelectorAll(".index")
         scalable: false,
         zoomable: false,
         movable: false,
-        aspectRatio: 30 / 19,
+        aspectRatio: 30 / 15,
         //preview: '.preview',
         minCropBoxWidth: 180,
         minCropBoxHeight: 240,
@@ -911,58 +865,7 @@ var td=document.querySelectorAll(".index")
 
   //cropper js
 
-  function BannerCropper1() {
-    console.log('hello')
-    const imagebox = document.getElementById('image-box2')
-    const crop_btn = document.getElementById('crop-btn2')
-    var fileInput = document.getElementById('bannerInput1');
-
-    var filePath = fileInput.value;
-    var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
-    if (!allowedExtensions.exec(filePath)) {
-      fileInput.value = '';
-      swal("Ther is a problem!", "...File Must be Image!");
-      return false;
-    } else {
-      //Image preview
-      const img_data = fileInput.files[0]
-      const url = URL.createObjectURL(img_data)
-      imagebox.innerHTML = `<img src="${url}" id="image" style="width:100%">`
-      const image = document.getElementById('image')
-      document.getElementById('image-box2').style.display = 'block'
-      document.getElementById('crop-btn2').style.display = 'block'
-      document.getElementById('confirm-btn1').style.display = 'none'
-
-      const cropper = new Cropper(image, {
-        autoCropArea: 1,
-        viewMode: 1,
-        scalable: false,
-        zoomable: false,
-        movable: false,
-        aspectRatio: 30 / 19,
-        //preview: '.preview',
-        minCropBoxWidth: 180,
-        minCropBoxHeight: 240,
-      })
-      crop_btn.addEventListener('click', () => {
-        cropper.getCroppedCanvas().toBlob((blob) => {
-          let fileInputElement = document.getElementById('bannerInput1');
-          let file = new File([blob], img_data.name, { type: "image/*", lastModified: new Date().getTime() });
-          let container = new DataTransfer();
-
-          container.items.add(file);
-          const img = container.files[0]
-          var url = URL.createObjectURL(img)
-          fileInputElement.files = container.files;
-          document.getElementById('Bannerpreview1').src = url
-          document.getElementById('Bannerpreview1').style.display = 'block'
-          document.getElementById('image-box2').style.display = 'none'
-          document.getElementById('crop-btn2').style.display = 'none'
-          document.getElementById('confirm-btn1').style.display = 'block'
-        }, 'image/webp', 0.5);
-      });
-    }
-  }
+  
 
   function confirmDel(bannerId) {
 

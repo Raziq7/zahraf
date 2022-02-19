@@ -4,6 +4,19 @@ const productHelpers = require("../Helpers/product-helpers");
 var router = express.Router();
 var ProductHelpers = require("../Helpers/product-helpers");
 const userHelpers = require("../Helpers/user-helpers");
+const AWS=require('aws-sdk')
+const uuid=require('uuid')
+
+const s3 = new AWS.S3({
+  credentials: {
+      accessKeyId: process.env.AWS_ID,
+      secretAccessKey: process.env.AWS_SECRET,
+  },
+});
+// const s3 = new AWS.S3({
+//   accessKeyId: process.env.AWS_ID,
+//   secretAccessKey: process.env.AWS_SECRET
+// })
 
 // admin session
 let isSession = (req, res, next) => {
@@ -83,20 +96,98 @@ router.post("/add-product", (req, res) => {
     let image1 = req.files.image1;
     let image2 = req.files.image2;
 
-    image.mv("./public/product-image/" + id.insertedId+"image"+".png", (err) => {
-      if (!err) {
-        image1.mv("./public/product-image/"+id.insertedId+"image1"+".png",(err)=>{
-          console.log("njan "+image1);
-          if(!err){
-            image2.mv("./public/product-image/"+id.insertedId+"image2"+".png",(err)=>{
-              console.log("njan "+image1);
-              if(!err){
-                res.redirect("/admin/product-manage");             }
-            })
-          }
-        })
-      }
-    })
+    console.log(image.name);
+    console.log(image.data);
+
+    let myFile=image.name.split(".")
+    const fileType = myFile[myFile.length - 1]
+try{
+  console.log("*****in try params");
+  const params = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: id.insertedId+"image"+".png",
+    Body: image.data
+}
+console.log(params,"/*****");
+s3.upload(params,(err,data)=>{
+  if (err) {
+    console.log("erererererrrrrrrrrr",err);
+    //  res.redirect("/admin/product-manage");
+     }else{
+       console.log("daTaaaaaaaaaaaaa",data);
+     }
+})
+}catch (error){
+  console.log(error);
+  console.log("************in catch error");
+}
+// image1
+
+let myFile1=image1.name.split(".")
+// const fileType = myFile1[myFile1.length - 1]
+try{
+console.log("*****in try params");
+const params = {
+Bucket: process.env.AWS_BUCKET_NAME,
+Key: id.insertedId+"image1"+".png",
+Body: image1.data
+}
+console.log(params,"/*****");
+s3.upload(params,(err,data)=>{
+if (err) {
+console.log("erererererrrrrrrrrr",err);
+
+ }else{
+   console.log("daTaaaaaaaaaaaaa",data);
+ }
+})
+}catch (error){
+console.log(error);
+console.log("************in catch error");
+
+}
+
+// image2
+
+let myFile2=image2.name.split(".")
+// const fileType = myFile1[myFile1.length - 1]
+try{
+console.log("*****in try params");
+const params = {
+Bucket: process.env.AWS_BUCKET_NAME,
+Key: id.insertedId+"image2"+".png",
+Body: image2.data
+}
+console.log(params,"/*****");
+s3.upload(params,(err,data)=>{
+if (err) {
+console.log("erererererrrrrrrrrr",err);
+
+ }else{
+   console.log("daTaaaaaaaaaaaaa",data);
+ }
+})
+}catch (error){
+console.log(error);
+console.log("************in catch error");
+
+}
+
+  res.redirect("/admin/product-manage");
+    // image.mv("./public/product-image/" + id.insertedId+"image"+".png", (err) => {
+    //   if (!err) {
+    //     image1.mv("./public/product-image/"+id.insertedId+"image1"+".png",(err)=>{
+    //       console.log("njan "+image1);
+    //       if(!err){
+    //         image2.mv("./public/product-image/"+id.insertedId+"image2"+".png",(err)=>{
+    //           console.log("njan "+image1);
+    //           if(!err){
+    //             res.redirect("/admin/product-manage");             }
+    //         })
+    //       }
+    //     })
+    //   }
+    // })
   }); 
 });
 
@@ -116,32 +207,110 @@ router.get("/edit-products/", (req, res) => {
     res.render("admin/product-managment/edit-product", {
       admin: true,
       editResponse,
-    });
+    });   
   });
 });
 
 router.post("/update-product/", (req, res) => {
   ProductHelpers.updateProduct(req.query.id, req.body).then((response) => {
-    res.redirect("/admin/product-manage");
-    
+    console.log("**/*/85964754",response);
     if(req.files){
       let image = req.files.image; 
       let image1 = req.files.image1;
       let image2 = req.files.image2;
       if(image){
-      image.mv("./public/product-image/" + req.query.id +"image"+".png");
+      // image.mv("./public/product-image/" + req.query.id +"image"+".png");
+
+    console.log(image.name);
+    console.log(image.data);
+
+    let myFile=image.name.split(".")
+    const fileType = myFile[myFile.length - 1]
+try{
+  console.log("*****in try params");
+  const params = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key: req.query.id+"image"+".png",
+    Body: image.data
+}
+console.log(params,"/*****");
+s3.upload(params,(err,data)=>{
+  if (err) {
+    console.log("erererererrrrrrrrrr",err);
+    //  res.redirect("/admin/product-manage");
+     }else{
+       console.log("daTaaaaaaaaaaaaa",data);
+     }
+})
+}catch (error){
+  console.log(error);
+  console.log("************in catch error");
+}
 
       }
       if(image1){
-        image1.mv("./public/product-image/" + req.query.id +"image1"+".png");
+        // image1.mv("./public/product-image/" + req.query.id +"image1"+".png");
 
-      }
+
+        // image1
+
+let myFile1=image1.name.split(".")
+// const fileType = myFile1[myFile1.length - 1]
+try{
+console.log("*****in try params");
+const params = {
+Bucket: process.env.AWS_BUCKET_NAME,
+Key: req.query.id+"image1"+".png",
+Body: image1.data
+}
+console.log(params,"/*****");
+s3.upload(params,(err,data)=>{
+if (err) {
+console.log("erererererrrrrrrrrr",err);
+
+ }else{
+   console.log("daTaaaaaaaaaaaaa",data);
+ }
+})
+}catch (error){
+console.log(error);
+console.log("************in catch error");
+
+}
+
+ }
 if(image2){
-  image2.mv("./public/product-image/" + req.query.id +"image2"+".png");
+  // image2.mv("./public/product-image/" + req.query.id +"image2"+".png");
+  // image2
+
+let myFile2=image2.name.split(".")
+// const fileType = myFile1[myFile1.length - 1]
+try{
+console.log("*****in try params");
+const params = {
+Bucket: process.env.AWS_BUCKET_NAME,
+Key: req.query.id+"image2"+".png",
+Body: image2.data
+}
+console.log(params,"/*****");
+s3.upload(params,(err,data)=>{
+if (err) {
+console.log("erererererrrrrrrrrr",err);
+
+ }else{
+   console.log("daTaaaaaaaaaaaaa",data);
+ }
+})
+}catch (error){
+console.log(error);
+console.log("************in catch error");
 
 }
+
 }
 
+}
+res.redirect("/admin/product-manage");
     
   });
 });
@@ -209,17 +378,61 @@ router.post('/add-banner',(req,res)=>{
   ProductHelpers.bannerAdd(req.body).then((id)=>{
     console.log("hello njan Id*********",id);
     let banner=req.files.banner;
-    banner.mv("./public/banner-image/"+id.insertedId+"banner"+".png", (err) => {
-      if(!err){
+    let myFile2=banner.name.split(".")
+// const fileType = myFile1[myFile1.length - 1]
+try{
+console.log("*****in try params");
+const params = {
+Bucket: process.env.AWS_BUCKET_NAME,
+Key: id.insertedId+"banner"+".png",
+Body: banner.data
+}
+console.log(params,"/*****");
+s3.upload(params,(err,data)=>{
+if (err) {
+console.log("erererererrrrrrrrrr",err);
+
+ }else{
+   console.log("daTaaaaaaaaaaaaa",data);
+ }
+})
+}catch (error){
+console.log(error);
+console.log("************in catch error");
+
+}
+    // banner.mv("./public/banner-image/"+id.insertedId+"banner"+".png", (err) => {
+      // if(!err){
         res.redirect('/admin/banner')
-      }
-    })
+      // }
+    // })
     
   })
 });
 
 router.post('/Banner-delete/',(req,res)=>{
   ProductHelpers.deleteBanner(req.body.bannerId).then((result)=>{
+    console.log("*****in try params",req.body.bannerId);
+
+    try{
+      const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: req.body.bannerId+"banner"+".png",
+      }
+      console.log(params,"/*****");
+      s3.deleteObject(params,(err,data)=>{
+      if (err) {
+      console.log("erererererrrrrrrrrr",err);
+      
+       }else{
+         console.log("daTaaaaaaaaaaaaa",data);
+       }
+      })
+      }catch (error){
+      console.log(error);
+      console.log("************in catch error");
+      
+      }
     res.redirect('/admin/banner')
   })
 
@@ -239,11 +452,33 @@ router.post('/small-banner',(req,res)=>{
   ProductHelpers.AddFirstSmallBanner(req.body).then((id)=>{
     console.log("hello njan Id*********",id);
     let banner=req.files.banner;
-    banner.mv("./public/banner-image/"+id.insertedId+"smallbanner"+".png", (err) => {
-      if(!err){
-        res.redirect('/admin/SmallBanner')
+    try{
+      console.log("*****in try params");
+      const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: id.insertedId+"smallbanner"+".png",
+      Body: banner.data
       }
-    })
+      console.log(params,"/*****");
+      s3.upload(params,(err,data)=>{
+      if (err) {
+      console.log("erererererrrrrrrrrr",err);
+      
+       }else{
+         console.log("daTaaaaaaaaaaaaa",data);
+       }
+      })
+      }catch (error){
+      console.log(error);
+      console.log("************in catch error");
+      
+      }
+      res.redirect('/admin/SmallBanner')
+    // banner.mv("./public/banner-image/"+id.insertedId+"smallbanner"+".png", (err) => {
+    //   if(!err){
+    //     res.redirect('/admin/SmallBanner')
+    //   }
+    // })
     
   })
 });
@@ -252,11 +487,34 @@ router.post('/small-banner1',(req,res)=>{
   ProductHelpers.AddSecondSmallBanner(req.body).then((id)=>{
     console.log("hello njan Id*********",id);
     let banner=req.files.banner;
-    banner.mv("./public/banner-image/"+id.insertedId+"smallbanner1"+".png", (err) => {
-      if(!err){
-        res.redirect('/admin/SmallBanner')
+
+    try{
+      console.log("*****in try params");
+      const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: id.insertedId+"smallbanner1"+".png",
+      Body: banner.data
       }
-    })
+      console.log(params,"/*****");
+      s3.upload(params,(err,data)=>{
+      if (err) {
+      console.log("erererererrrrrrrrrr",err);
+      
+       }else{
+         console.log("daTaaaaaaaaaaaaa",data);
+       }
+      })
+      }catch (error){
+      console.log(error);
+      console.log("************in catch error");
+      
+      }
+      res.redirect('/admin/SmallBanner')
+    // banner.mv("./public/banner-image/"+id.insertedId+"smallbanner1"+".png", (err) => {
+    //   if(!err){
+    //     
+    //   }
+    // })
     
   })
 });
@@ -266,11 +524,33 @@ router.post('/small-banner2',(req,res)=>{
   ProductHelpers.AddThirdSmallBanner(req.body).then((id)=>{
     console.log("hello njan Id*********",id);
     let banner=req.files.banner;
-    banner.mv("./public/banner-image/"+id.insertedId+"smallbanner2"+".png", (err) => {
-      if(!err){
-        res.redirect('/admin/SmallBanner')
+    try{
+      console.log("*****in try params");
+      const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: id.insertedId+"smallbanner2"+".png",
+      Body: banner.data
       }
-    })
+      console.log(params,"/*****");
+      s3.upload(params,(err,data)=>{
+      if (err) {
+      console.log("erererererrrrrrrrrr",err);
+      
+       }else{
+         console.log("daTaaaaaaaaaaaaa",data);
+       }
+      })
+      }catch (error){
+      console.log(error);
+      console.log("************in catch error");
+      
+      }
+      res.redirect('/admin/SmallBanner')
+    // banner.mv("./public/banner-image/"+id.insertedId+"smallbanner2"+".png", (err) => {
+    //   if(!err){
+    //     
+    //   }
+    // })
     
   })
 });
@@ -279,11 +559,32 @@ router.post('/small-banner3',(req,res)=>{
   ProductHelpers.AddFourthSmallBanner(req.body).then((id)=>{
     console.log("hello njan Id*********",id);
     let banner=req.files.banner;
-    banner.mv("./public/banner-image/"+id.insertedId+"smallbanner3"+".png", (err) => {
-      if(!err){
-        res.redirect('/admin/SmallBanner')
+    try{
+      console.log("*****in try params");
+      const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: id.insertedId+"smallbanner3"+".png",
+      Body: banner.data
       }
-    })
+      console.log(params,"/*****");
+      s3.upload(params,(err,data)=>{
+      if (err) {
+      console.log("erererererrrrrrrrrr",err);
+      
+       }else{
+         console.log("daTaaaaaaaaaaaaa",data);
+       }
+      })
+      }catch (error){
+      console.log(error);
+      console.log("************in catch error");
+      }
+      res.redirect('/admin/SmallBanner')
+
+    // banner.mv("./public/banner-image/"+id.insertedId+"smallbanner3"+".png", (err) => {
+    //   if(!err){
+    //   }
+    // })
     
   })
 });
@@ -292,14 +593,52 @@ router.post('/smallBanner-delete',(req,res)=>{
 
   console.log(req.body);
   ProductHelpers.deleteSmallBanner(req.body.smallbannerId).then((result)=>{
+
+    try{
+      const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: req.body.smallbannerId+"smallbanner"+".png",
+      }
+      console.log(params,"/*****");
+      s3.deleteObject(params,(err,data)=>{
+      if (err) {
+      console.log("erererererrrrrrrrrr",err);
+      
+       }else{
+         console.log("daTaaaaaaaaaaaaa",data);
+       }
+      })
+      }catch (error){
+      console.log(error);
+      console.log("************in catch error");
+      
+      }
     res.redirect('/admin/SmallBanner')
   })
 });
 router.post('/smallBanner-delete2',(req,res)=>{
   console.log("validity*********");
-
   console.log(req.body);
   ProductHelpers.deleteSmallBanner2(req.body.smallbannerId).then((result)=>{
+    try{
+      const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: req.body.smallbannerId+"smallbanner2"+".png",
+      }
+      console.log(params,"/*****");
+      s3.deleteObject(params,(err,data)=>{
+      if (err) {
+      console.log("erererererrrrrrrrrr",err);
+      
+       }else{
+         console.log("daTaaaaaaaaaaaaa",data);
+       }
+      })
+      }catch (error){
+      console.log(error);
+      console.log("************in catch error");
+      
+      }
     res.redirect('/admin/SmallBanner')
   })
 })
@@ -308,6 +647,25 @@ router.post('/smallBanner-delete3',(req,res)=>{
 
   console.log(req.body);
   ProductHelpers.deleteSmallBanner3(req.body.smallbannerId).then((result)=>{
+    try{
+      const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: req.body.smallbannerId+"smallbanner3"+".png",
+      }
+      console.log(params,"/*****");
+      s3.deleteObject(params,(err,data)=>{
+      if (err) {
+      console.log("erererererrrrrrrrrr",err);
+      
+       }else{
+         console.log("daTaaaaaaaaaaaaa",data);
+       }
+      })
+      }catch (error){
+      console.log(error);
+      console.log("************in catch error");
+      
+      }
     res.redirect('/admin/SmallBanner')
   })
 })

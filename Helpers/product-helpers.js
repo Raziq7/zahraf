@@ -8,9 +8,10 @@ module.exports = {
     addProduct: (product) => {
         product.offer=offer =false;
         product.ProductOffer=false;
-        product.price=parseInt(product.price)
         product.stock=parseInt(product.stock)
         product.currentstock=product.stock
+        product.price=parseInt(product.price)
+
 
 
         return new Promise((res, rej) => {

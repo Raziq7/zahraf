@@ -719,9 +719,8 @@
   <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js" defer></script>
   <!-- End custom js for this page-->
 
-
-
 </body>
+
 <script>
   var td = document.querySelectorAll(".index")
   console.log("td.length******", td.length)
@@ -762,8 +761,7 @@
       data: { value, orderId, productId },
        success:(response)=>{
               if(response.status){
-              alert("Status Changed")
-              }
+           }
             }
     })
     location.reload()

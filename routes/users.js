@@ -8,6 +8,16 @@ dotenv.config()
 var userHelpers = require("../Helpers/user-helpers");
 var client = require("twilio")(process.env.ACCOUNT_SID, process.env.AUTH_TOCKEN);
 
+const AWS=require('aws-sdk')
+const uuid=require('uuid')
+
+const s3 = new AWS.S3({
+  credentials: {
+      accessKeyId: process.env.AWS_ID,
+      secretAccessKey: process.env.AWS_SECRET,
+  },
+});
+
 const paypal = require('paypal-rest-sdk');
 paypal.configure({
   'mode': 'sandbox', //sandbox or live
@@ -662,7 +672,28 @@ router.get("/myprofile",isSession,async(req, res) => {
     }
     res.redirect('/myprofile')
     let myrproimage =req.files.myrproimage;
-    myrproimage.mv('./public/Profile-image/'+req.session.user._id+".png")
+    try{
+      console.log("*****in try params");
+      const params = {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: req.session.user._id+".png",
+      Body: myrproimage.data
+      }
+      console.log(params,"/*****");
+      s3.upload(params,(err,data)=>{
+      if (err) {
+      console.log("erererererrrrrrrrrr",err);
+      
+       }else{
+         console.log("daTaaaaaaaaaaaaa",data);
+       }
+      })
+      }catch (error){
+      console.log(error);
+      console.log("************in catch error");
+      
+      }
+    // myrproimage.mv('./public/Profile-image/'+req.session.user._id+".png")
 
   })
   router.get('/change-password',isSession,(req,res)=>{
