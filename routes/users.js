@@ -81,6 +81,7 @@ router.get("/login", (req, res) => {
 });
 router.get("/signup", (req, res) => {
   let userlog=null;
+  req.session.logedIn=false;
   if (req.session.logedIn) {
     userlog = req.session.response;
     res.redirect("/");
