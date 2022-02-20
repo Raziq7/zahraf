@@ -1,5 +1,7 @@
 const { response } = require("express");
 var express = require("express");
+const dotenv = require('dotenv');
+dotenv.config()
 const productHelpers = require("../Helpers/product-helpers");
 var router = express.Router();
 var ProductHelpers = require("../Helpers/product-helpers");
